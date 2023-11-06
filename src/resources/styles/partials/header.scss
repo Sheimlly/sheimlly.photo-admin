@@ -1,0 +1,87 @@
+header {
+    
+    .title-panel {
+        margin: 50px 0;
+
+        @media screen and (min-width: 768px) {
+            margin: 25px 0;
+        }
+
+        &--socials {
+            a {
+                color: #000000;
+    
+                &:hover {
+                    opacity: 50%;
+                }
+            }
+
+            i {
+                font-size: 40px;
+                @media screen and (min-width: 768px) {
+                    font-size: 30px;
+                }
+            }
+        }
+
+        h1 {
+            text-align: center;
+            margin: 0;
+        }
+        
+        &--languages {
+            p {
+                margin: 0 5px;
+                font-size: 24px;
+                font-weight: 600;
+                cursor: pointer;
+
+                &:hover {
+                    opacity: 50%;
+                }
+
+                @media screen and (min-width: 768px) {
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+
+    .navigation-panel {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        background: #cca9cf;
+        p {
+            font-size: 32px;
+            font-weight: 600;
+            // width: auto;
+            text-align: center;
+
+            margin: 10px 0;
+
+            @media screen and (min-width: 768px) {
+                margin: 0;
+                width: auto;
+                font-size: 28px;
+                font-weight: 700;
+            }
+        }
+
+        a {
+            color: #000000;
+            text-decoration: none;
+
+            &:hover {
+                opacity: 50%;
+            }
+        }
+
+        &--logout {
+            cursor: pointer;
+
+            &:hover {
+                opacity: 50%;
+            }
+        }
+    }
+}

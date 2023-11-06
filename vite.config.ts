@@ -14,7 +14,6 @@ export default defineConfig({
   plugins: [
     reactRefresh(),
     generouted(),
-    react(),
     svgrPlugin({
       svgrOptions: {
         icon: true,
@@ -25,9 +24,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8000/admin',
+        target: 'http://localhost:8000/',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/photos/, ''),
+        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     }
   }
