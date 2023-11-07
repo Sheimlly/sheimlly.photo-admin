@@ -1,36 +1,25 @@
-import axios from "axios";
-import { setAuthToken } from "../helpers/setAuthToken";
+import api from "../helpers/api";
 import { useState } from "react";
 
 const LoginForm = () => {
     const token = localStorage.getItem("token");
     if (token) {
-        setAuthToken(token);
         window.location.href = '/';
     }
 
-    const [username, setUsername] = useState<string>()
-    const [password, setPassword] = useState<string>()
+    const [username, setUsername] = useState<string>();
+    const [password, setPassword] = useState<string>();
 
     const handleSubmit = () => {
-        axios
+        api
             .post('/api/token/', {
                 username: username,
                 password: password,
             })
             .then(response => {
-                //get token from response
-                console.log(response);
-                const token = response.data.token;
-                
-                //set JWT token to local
-                localStorage.setItem("token", token);
-    
-                //set token to axios common header
-                setAuthToken(token);
-    
-                //redirect user to home page
-                window.location.href = '/'
+                localStorage.setItem('token', response.data.access);
+                localStorage.setItem('refresh', response.data.refresh);
+                window.location.href = '/';
             })
             .catch(err => console.log(err));
     }

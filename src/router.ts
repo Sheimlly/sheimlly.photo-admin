@@ -7,6 +7,7 @@ export type Path =
   | `/`
   | `/login`
   | `/partials/header`
+  | `/photos`
 
 export type Params = {
   

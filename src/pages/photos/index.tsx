@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import api from "../helpers/api";
-import { Photos } from '../helpers/interfaces';
+import { useState, useEffect, useRef } from "react";
+import api from "../../helpers/api";
+import { Photos } from '../../helpers/interfaces';
 
-const HomePage = () => {
+const PhotosPage = () => {
     const token = localStorage.getItem("token");
     if (!token) {
         window.location.href = '/login';
@@ -15,19 +15,10 @@ const HomePage = () => {
         window.location.reload();
     }
 
-    const handleRemoveFromMainPage = (id: number) => {
-        api.put(`/api/photos/${id}/`, {main_page: false});
-        window.location.reload();
-    }
-
     useEffect(() => {
         const fetchPhotos = async () => {
             try {
-                const response = await api.get('/api/photos/', {
-                    params: {
-                        main_page: true
-                    }
-                });
+                const response = await api.get('/api/photos/');
                 SetPhotos(response.data);
             } catch (error) {
                 console.log(error);
@@ -39,11 +30,14 @@ const HomePage = () => {
 
     return (
         <>
-            <section className="homepage__header site_header container my-5">
-                <h1 className="homepage__header site_header-title">Homepage</h1>
+            <section className="site_header container my-5">
+                <h1 className="site_header-title">Photos</h1>
             </section>
 
-            <section className="container photos">
+            <section className="photos container">
+                <div className="photos__filters">
+
+                </div>
                 <div className="photos__container">
                     {photos.map((photo) => {
                         return (
@@ -64,7 +58,7 @@ const HomePage = () => {
                                 <div className="mx-5">
                                     <button><a href={`/photos/${photo.id}`}>Edit</a></button>
                                     <button onClick={() => handleDelete(photo.id)}>Delete</button>
-                                    <button onClick={() => handleRemoveFromMainPage(photo.id)}>Remove from main page</button>
+                                    {/* <button onClick={() => handleRemoveFromMainPage(photo.id)}>Remove from main page</button> */}
                                 </div>
                             </div>
                         )
@@ -75,4 +69,4 @@ const HomePage = () => {
     );
 }
 
-export default HomePage;
+export default PhotosPage;
