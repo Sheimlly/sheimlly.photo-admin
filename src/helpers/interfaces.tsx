@@ -13,19 +13,6 @@ export interface Photos {
     main_page: string;
 }
 
-export interface Categories {
-    id: number;
-    name: string;
-    name_pl: string;
-}
-
-export interface Sessions {
-    id: number;
-    name: string;
-    name_pl: string;
-    date_taken: string;
-}
-
 export interface PhotoFilters {
     search: string | undefined,
     category: number | undefined,
@@ -39,4 +26,17 @@ export interface PhotoAdd {
     session: string | undefined,
     date_created: string | undefined,
     main_page: boolean | undefined
+}
+
+export interface Categories {
+    id: number;
+    name: string;
+    name_pl: string;
+}
+
+export interface Sessions {
+    id: number;
+    name: string;
+    name_pl: string;
+    date_taken: string;
 }

@@ -84,7 +84,7 @@ const PhotosPage = () => {
 
             <section className="photos container">
                 <div className="add-instance"><a href='/photos/add'>+ Add Photo</a></div>
-                <div className="photos__filters row my-5">
+                <div className="filtering row my-5">
                     <div className="col-3">
                         <p>Photo name</p>
                         <input onChange={(e) => { handleFilterChange('search', e.target.value) }} type="text" value={filters?.search} />
@@ -140,7 +140,7 @@ const PhotosPage = () => {
                                     <p>{photo.main_page ? 'True' : 'False'}</p>
                                 </div>
                                 <div className="mx-5">
-                                    <button><a href={`/photos/${photo.id}`}>Edit</a></button>
+                                    <button className="a-button"><a href={`/photos/${photo.id}`}>Edit</a></button>
                                     <button onClick={() => handleDelete(photo.id)}>Delete</button>
                                     {/* <button onClick={() => handleRemoveFromMainPage(photo.id)}>Remove from main page</button> */}
                                 </div>
