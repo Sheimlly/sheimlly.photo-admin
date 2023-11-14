@@ -21,7 +21,6 @@ api.interceptors.response.use(
     (response) => response,
     async (error) => {
       const originalRequest = error.config;
-      console.log(error);
   
       // If the error status is 401 and there is no originalRequest._retry flag,
       // it means the token has expired and we need to refresh it
