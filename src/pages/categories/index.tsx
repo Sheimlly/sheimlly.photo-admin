@@ -38,7 +38,7 @@ const CategoriesPage = () => {
             <div className="add-instance"><a href='/categories/add'>+ Add Category</a></div>
                 <div className="filtering row my-5">
                     <div className="col-3">
-                        <p>Photo name</p>
+                        <p>Category name</p>
                         <input onChange={(e) => { setSearch(e.target.value) }} type="text" value={search} />
                     </div>
                 </div>
