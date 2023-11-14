@@ -1,4 +1,4 @@
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, FormEvent, ChangeEvent } from "react";
 import { useParams } from 'react-router-dom';
 import api from "../../helpers/api";
 import { Categories, Sessions } from "../../helpers/interfaces";
@@ -40,7 +40,7 @@ const EditPhoto = () => {
         window.location.href = '/photos';
     }
 
-    const handleCheckbox = (e: any) => {
+    const handleCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
         if (!e.target) return;
         if (e.target.checked) {
             setPhoto({
@@ -110,7 +110,7 @@ const EditPhoto = () => {
                             <form onSubmit={(e) => handleUpdate(e)}>
                                 <div className="">
                                     <label>Category:</label>
-                                    <select onChange={(e) => {setPhoto({...photo, ...{category: e.target.value} as unknown as Photo,})}}>
+                                    <select onChange={(e) => {setPhoto({...photo, ...{category: e.target.value} as unknown as Photo})}}>
                                         {categories.map(category => {
                                             return(
                                                 <option key={category.id} value={category.id} selected={category.id == photo.category}>{category.name}</option>
@@ -120,7 +120,7 @@ const EditPhoto = () => {
                                 </div>
                                 <div className="">
                                     <label>Session:</label>
-                                    <select onChange={(e) => {setPhoto({...photo, ...{session: e.target.value} as unknown as Photo,})}}>
+                                    <select onChange={(e) => {setPhoto({...photo, ...{session: e.target.value} as unknown as Photo})}}>
                                         <option>None</option>
                                         {sessions.map(session => {
                                             return(
@@ -131,7 +131,7 @@ const EditPhoto = () => {
                                 </div>
                                 <div className="">
                                     <label>Date created:</label>
-                                    <input type="date" onChange={(e) => {setPhoto({...photo, ...{date_created: e.target.value} as unknown as Photo,})}} defaultValue={photo.date_created} />
+                                    <input type="date" onChange={(e) => {setPhoto({...photo, ...{date_created: e.target.value} as unknown as Photo})}} defaultValue={photo.date_created} />
                                 </div>
                                 <div className="">
                                     <label>Main page:</label>

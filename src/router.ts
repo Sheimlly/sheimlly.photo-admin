@@ -9,6 +9,7 @@ export type Path =
   | `/partials/header`
   | `/photos`
   | `/photos/:id`
+  | `/photos/add`
 
 export type Params = {
   '/photos/:id': { id: string }

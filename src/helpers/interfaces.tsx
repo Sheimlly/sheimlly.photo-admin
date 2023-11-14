@@ -32,3 +32,11 @@ export interface PhotoFilters {
     session: string | undefined,
     main_page: boolean | undefined
 }
+
+export interface PhotoAdd {
+    image: File | undefined,
+    category: number | undefined,
+    session: string | undefined,
+    date_created: string | undefined,
+    main_page: boolean | undefined
+}

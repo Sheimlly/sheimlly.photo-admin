@@ -83,7 +83,8 @@ const PhotosPage = () => {
             </section>
 
             <section className="photos container">
-                <div className="photos__filters row mb-5">
+                <div className="add-instance"><a href='/photos/add'>+ Add Photo</a></div>
+                <div className="photos__filters row my-5">
                     <div className="col-3">
                         <p>Photo name</p>
                         <input onChange={(e) => { handleFilterChange('search', e.target.value) }} type="text" value={filters?.search} />

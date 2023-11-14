@@ -59,6 +59,17 @@ h2 {
     }
 }
 
+.add-instance {
+    a {
+        font-size: 32px;
+        color: #000000;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+}
+
 .edit-form {
     div {
         margin-bottom: 20px;

@@ -14,7 +14,7 @@ const Header = () => {
             <div className="navigation-panel">
                 <div className="container">
                     <div className="row justify-content-center justify-content-md-between">
-                        <p className='col-12 col-lg-3'><a href='/Photos'>Photos</a></p>
+                        <p className='col-12 col-lg-3'><a href='/photos'>Photos</a></p>
                         <p className='col-12 col-lg-3'><a href='/categories'>Categories</a></p>
                         <p className='col-12 col-lg-3'><a href='/sessions'>Sessions</a></p>
                         <p className='col-12 col-lg-3 navigation-panel--logout' onClick={handleLogout}>Logout</p>
