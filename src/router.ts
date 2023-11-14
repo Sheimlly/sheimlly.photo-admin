@@ -8,9 +8,10 @@ export type Path =
   | `/login`
   | `/partials/header`
   | `/photos`
+  | `/photos/:id`
 
 export type Params = {
-  
+  '/photos/:id': { id: string }
 }
 
 export type ModalPath = never

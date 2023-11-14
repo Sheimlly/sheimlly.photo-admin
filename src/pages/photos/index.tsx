@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import api from "../../helpers/api";
 import { Photos } from '../../helpers/interfaces';
 
