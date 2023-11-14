@@ -19,11 +19,6 @@ const CategoriesPage = () => {
         }
     }
 
-    const handleDelete = (id: number) => {
-        api.delete(`/api/photos/categories/${id}/`);
-        window.location.reload();
-    }
-
     useEffect(() => {
         fetchCategories();
     }, [search]);
