@@ -25,22 +25,22 @@ const EditPhoto = () => {
 
     const handleDelete = () => {
         api.delete(`/api/photos/${id}/`);
-        window.location.reload();
+        window.location.href = '/photos';
     }
 
     const handleUpdate = (e: FormEvent) => {
-        if(photo && photo.session instanceof  String) {
+        if(photo && photo.session instanceof String) {
             setPhoto({
                 ...photo,
                 ...{session: undefined} as unknown as Photo,
             })
         }
-        e.preventDefault()
+        e.preventDefault();
         api.patch(`/api/photos/${id}/`, photo);
+        window.location.href = '/photos';
     }
 
     const handleCheckbox = (e: any) => {
-        console.log(photo);
         if (!e.target) return;
         if (e.target.checked) {
             setPhoto({

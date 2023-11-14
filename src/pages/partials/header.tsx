@@ -1,12 +1,4 @@
-import axios from "axios";
-
 const Header = () => {
-    // const { i18n, t } = useTranslation()
-
-    // const changeLang = (lang_code: string) => {
-    //     i18n.changeLanguage(lang_code);
-    // }
-    
     const handleLogout = () => {
         localStorage.removeItem("token");
         window.location.href = '/login';

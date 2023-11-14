@@ -8,15 +8,17 @@ const HomePage = () => {
         window.location.href = '/login';
     }
 
-    const [photos, SetPhotos] = useState<Photos[] | []>([]);
+    const [photos, setPhotos] = useState<Photos[] | []>([]);
 
+    // It does'nt always work :c
     const handleDelete = (id: number) => {
         api.delete(`/api/photos/${id}/`);
         window.location.reload();
     }
 
+    // It does'nt always work :c
     const handleRemoveFromMainPage = (id: number) => {
-        api.put(`/api/photos/${id}/`, {main_page: false});
+        api.patch(`/api/photos/${id}/`, {main_page: false});
         window.location.reload();
     }
 
@@ -28,7 +30,7 @@ const HomePage = () => {
                         main_page: true
                     }
                 });
-                SetPhotos(response.data);
+                setPhotos(response.data);
             } catch (error) {
                 console.log(error);
             }

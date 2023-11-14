@@ -25,3 +25,10 @@ export interface Sessions {
     name_pl: string;
     date_taken: string;
 }
+
+export interface PhotoFilters {
+    search: string | undefined,
+    category: number | undefined,
+    session: string | undefined,
+    main_page: boolean | undefined
+}
