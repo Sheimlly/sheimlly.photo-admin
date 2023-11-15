@@ -52,6 +52,10 @@ const SessionsPage = () => {
         fetchCategories();
     }, [search]);
 
+    useEffect(() => {
+        document.title = 'Sessions';
+    })
+
 
     return (
         <>

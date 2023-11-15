@@ -33,6 +33,8 @@ const EditCategory = () => {
             }
         }
 
+        document.title = 'Edit session';
+
         fetchCategory();
     }, []);
 

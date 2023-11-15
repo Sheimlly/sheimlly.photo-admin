@@ -52,6 +52,9 @@ const CategoriesPage = () => {
         fetchCategories();
     }, [search]);
 
+    useEffect(() => {
+        document.title = 'Categories';
+    }, [])
 
     return (
         <>

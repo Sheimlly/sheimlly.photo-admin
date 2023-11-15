@@ -78,6 +78,8 @@ const PhotosPage = () => {
             }
         }
 
+        document.title = 'Photos ';
+
         fetchCategories();
         fetchSessions();
     }, []);

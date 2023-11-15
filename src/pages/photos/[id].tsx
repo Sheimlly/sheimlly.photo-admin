@@ -91,6 +91,8 @@ const EditPhoto = () => {
             }
         }
 
+        document.title = 'Edit photo';
+
         fetchPhoto();
         fetchCategories();
         fetchSessions();

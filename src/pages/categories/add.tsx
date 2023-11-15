@@ -1,4 +1,4 @@
-import { FormEvent, useState} from 'react';
+import { FormEvent, useEffect, useState} from 'react';
 import { CategoryAdd } from '../../helpers/interfaces';
 import api from "../../helpers/api";
 
@@ -12,7 +12,11 @@ const AddCategory = () => {
         e.preventDefault();
         await api.post('/api/photos/categories/', category);
         window.location.href = '/categories';
-    } 
+    }
+
+    useEffect(() => {
+        document.title = 'Add category';
+    }, [])
 
     return (
         <>

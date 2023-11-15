@@ -136,6 +136,8 @@ const AddSession = () => {
                 console.log(error);
             }
         }
+        
+        document.title = 'Add session';
 
         fetchCategories();
     }, [])

@@ -74,6 +74,8 @@ const AddPhoto = () => {
             }
         }
 
+        document.title = 'Add photo';
+
         fetchCategories();
         fetchSessions();
     }, []);

@@ -1,5 +1,5 @@
 import api from "../helpers/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const LoginForm = () => {
     const token = localStorage.getItem("token");
@@ -24,6 +24,9 @@ const LoginForm = () => {
             .catch(err => console.log(err));
     }
 
+    useEffect(() => {
+        document.title = 'Login';
+    }, [])
       
     return (
         <section className="container login-page">

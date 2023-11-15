@@ -49,6 +49,8 @@ const EditCategory = () => {
             }
         }
 
+        document.title = 'Edit category';
+
         fetchCategory();
     }, []);
 

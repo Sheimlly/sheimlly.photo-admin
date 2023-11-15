@@ -34,6 +34,8 @@ const HomePage = () => {
             }
         }
 
+        document.title = 'Admin panel';
+
         fetchPhotos();
     }, []);
 
