@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import api from "../../helpers/api";
 import { Photos, Categories, Sessions, PhotoFilters } from '../../helpers/interfaces';
 
@@ -32,6 +32,16 @@ const PhotosPage = () => {
             setPhotos(response.data);
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    const handleCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
+        if (!e.target) return;
+        if (e.target.checked) {
+            handleFilterChange('main_page', true)
+        }
+        else {
+            handleFilterChange('main_page', false)
         }
     }
 
@@ -115,7 +125,7 @@ const PhotosPage = () => {
                     </div>
                     <div className="col-2">
                         <p>Main page</p>
-                        <input type="checkbox" />
+                        <input type="checkbox" onChange={(e) => handleCheckbox(e)} />
                     </div>
                 </div>
                 <div className="photos__container">
@@ -142,7 +152,6 @@ const PhotosPage = () => {
                                 <div className="mx-5">
                                     <button className="a-button"><a href={`/photos/${photo.id}`}>Edit</a></button>
                                     <button onClick={() => handleDelete(photo.id)}>Delete</button>
-                                    {/* <button onClick={() => handleRemoveFromMainPage(photo.id)}>Remove from main page</button> */}
                                 </div>
                             </div>
                         )
