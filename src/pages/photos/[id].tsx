@@ -23,12 +23,12 @@ const EditPhoto = () => {
     const [categories, setCategories] = useState<Categories[] | []>([]);
     const [sessions, setSessions] = useState<Sessions[] | []>([]);
 
-    const handleDelete = () => {
-        api.delete(`/api/photos/${id}/`);
+    const handleDelete = async () => {
+        await api.delete(`/api/photos/${id}/`);
         window.location.href = '/photos';
     }
 
-    const handleUpdate = (e: FormEvent) => {
+    const handleUpdate = async (e: FormEvent) => {
         if(photo && photo.session instanceof String) {
             setPhoto({
                 ...photo,
@@ -36,7 +36,7 @@ const EditPhoto = () => {
             })
         }
         e.preventDefault();
-        api.patch(`/api/photos/${id}/`, photo);
+        await api.patch(`/api/photos/${id}/`, photo);
         window.location.href = '/photos';
     }
 

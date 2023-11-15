@@ -19,8 +19,8 @@ const PhotosPage = () => {
         main_page: undefined,
     });
 
-    const handleDelete = (id: number) => {
-        api.delete(`/api/photos/${id}/`);
+    const handleDelete = async (id: number) => {
+        await api.delete(`/api/photos/${id}/`);
         window.location.reload();
     }
 

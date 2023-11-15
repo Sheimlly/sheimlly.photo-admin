@@ -6,6 +6,11 @@ const CategoriesPage = () => {
     const [categories, setCategories] = useState<Categories[] | []>([]);
     const [search, setSearch] = useState<string>();
 
+    const handleDelete = async (id: number) => {
+        await api.delete(`/api/photos/categories/${id}/`);
+        window.location.reload();
+    }
+
     const fetchCategories = async () => {
         try {
             const response = await api.get('/api/photos/categories/', {
@@ -13,7 +18,31 @@ const CategoriesPage = () => {
                     search: search
                 }
             });
+            
             setCategories(response.data);
+
+            response.data.map(async (cat: Categories) => {
+                const res = await api.get('/api/photos/', {
+                    params: {
+                        category: cat.id
+                    }
+                });
+                
+                if (res.data.length === 0) {
+                    const newCategories = response.data.map((c: Categories) => {
+                        if (c.id === cat.id) {
+                          return {
+                            ...c,
+                            able_to_delete: true
+                          }
+                        } else {
+                          return c
+                        }
+                    })
+
+                    setCategories(newCategories);
+                }
+            })
         } catch (error) {
             console.log(error);
         }
@@ -22,6 +51,7 @@ const CategoriesPage = () => {
     useEffect(() => {
         fetchCategories();
     }, [search]);
+
 
     return (
         <>
@@ -46,6 +76,10 @@ const CategoriesPage = () => {
                                 <p className="col-1">-</p>
                                 <p className="col-2">{category.name_pl}</p>
                                 <button className="col-2 a-button"><a href={`/categories/${category.id}`}>edit</a></button>
+                                <p className="col-1"> | </p>
+                                { category.able_to_delete &&
+                                    <button className="col-2" onClick={() => {handleDelete(category.id)}}>Delete</button>
+                                }
                             </div>
                         )
                     })}

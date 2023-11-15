@@ -87,7 +87,7 @@ const AddPhoto = () => {
                 <form onSubmit={(e) => addPhoto(e)}>
                     <div>
                         <label>Image</label>
-                        <input type='file' onChange={(e) => {handleFileChange(e)}} />
+                        <input type='file' onChange={(e) => {handleFileChange(e)}} required />
                     </div>
                     <div className="">
                         <label>Category:</label>

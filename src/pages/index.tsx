@@ -10,15 +10,13 @@ const HomePage = () => {
 
     const [photos, setPhotos] = useState<Photos[] | []>([]);
 
-    // It does'nt always work :c
-    const handleDelete = (id: number) => {
-        api.delete(`/api/photos/${id}/`);
+    const handleDelete = async (id: number) => {
+        await api.delete(`/api/photos/${id}/`);
         window.location.reload();
     }
 
-    // It does'nt always work :c
-    const handleRemoveFromMainPage = (id: number) => {
-        api.patch(`/api/photos/${id}/`, {main_page: false});
+    const handleRemoveFromMainPage = async (id: number) => {
+        await api.patch(`/api/photos/${id}/`, {main_page: false});
         window.location.reload();
     }
 

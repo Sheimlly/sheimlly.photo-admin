@@ -32,6 +32,12 @@ export interface Categories {
     id: number;
     name: string;
     name_pl: string;
+    able_to_delete?: boolean;
+}
+
+export interface CategoryAdd {
+    name: string | undefined;
+    name_pl: string | undefined;
 }
 
 export interface Sessions {
