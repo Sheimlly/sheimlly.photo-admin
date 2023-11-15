@@ -47,3 +47,9 @@ export interface Sessions {
     date_taken: string;
     image?: string;
 }
+
+export interface SessionAdd {
+    name: string | undefined;
+    name_pl: string | undefined;
+    date_taken: string | undefined;
+}

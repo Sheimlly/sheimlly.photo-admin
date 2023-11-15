@@ -2,7 +2,7 @@ import { Sessions } from "../../helpers/interfaces";
 import { useState, useEffect } from "react";
 import api from "../../helpers/api";
 
-const CategoriesPage = () => {
+const SessionsPage = () => {
     const [sessions, setSessions] = useState<Sessions[] | []>([]);
     const [search, setSearch] = useState<string>();
 
@@ -60,10 +60,10 @@ const CategoriesPage = () => {
             </section>
 
             <section className="container">
-            <div className="add-instance"><a href='/categories/add'>+ Add session</a></div>
+            <div className="add-instance"><a href='/sessions/add'>+ Add session</a></div>
                 <div className="filtering row my-5">
                     <div className="col-3">
-                        <p>Category name</p>
+                        <p>Session name</p>
                         <input onChange={(e) => { setSearch(e.target.value) }} type="text" value={search} />
                     </div>
                 </div>
@@ -99,4 +99,4 @@ const CategoriesPage = () => {
     )
 }
 
-export default CategoriesPage;
+export default SessionsPage;
