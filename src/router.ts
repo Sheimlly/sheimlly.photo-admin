@@ -12,10 +12,13 @@ export type Path =
   | `/photos`
   | `/photos/:id`
   | `/photos/add`
+  | `/sessions`
+  | `/sessions/:id`
 
 export type Params = {
   '/categories/:id': { id: string }
   '/photos/:id': { id: string }
+  '/sessions/:id': { id: string }
 }
 
 export type ModalPath = never

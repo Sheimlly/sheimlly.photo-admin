@@ -1,15 +1,7 @@
-import { useState, useEffect, FormEvent, ChangeEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { useParams } from 'react-router-dom';
 import api from "../../helpers/api";
-import { Categories, Sessions } from "../../helpers/interfaces";
-
-interface Photo {
-    id: Number,
-    category: Number,
-    session?: Number | null,
-    date_created: any,
-    main_page: Boolean
-}
+import { Categories } from "../../helpers/interfaces";
 
 const EditCategory = () => {
     const { id } = useParams();

@@ -45,4 +45,5 @@ export interface Sessions {
     name: string;
     name_pl: string;
     date_taken: string;
+    image?: string;
 }
