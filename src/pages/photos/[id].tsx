@@ -99,7 +99,7 @@ const EditPhoto = () => {
     return (
         <>
             <section className="site_header container my-5">
-                <h1 className="site_header-title">Photos</h1>
+                <h1 className="site_header-title">Edit photo</h1>
             </section>
 
             <section className="container">
