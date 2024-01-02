@@ -9,7 +9,8 @@ const UserInfoPage = () => {
     }
 
     const [userInfo, setUserInfo] = useState<UserInfo | null>();
-    const [socialMedia, setSocialMedia] = useState<SocialMedia[] | []>([]);
+    const [socialMedia, setSocialMedia] = useState<SocialMedia | null>();
+    const [socialMedias, setSocialMedias] = useState<SocialMedia[] | []>([]);
     const [editUserInfo, setEditUserInfo] = useState(false);
 
     // const handleDelete = async (id: number) => {
@@ -27,6 +28,9 @@ const UserInfoPage = () => {
                     phone_number: userInfo.phone_number
                 }
             )
+            .then(() => {
+                window.location.reload();
+            })
             .catch(err => {
                 console.log(err);
             });
@@ -38,12 +42,38 @@ const UserInfoPage = () => {
                     phone_number: userInfo?.phone_number
                 }
             )
+            .then(() => {
+                window.location.reload();
+            })
             .catch(err => {
                 console.log(err);
             });
         }
+    }
 
-        window.location.reload();
+    const addSocialMedia = (e: FormEvent) => {
+        e.preventDefault();
+        api.post('/api/users/socialmedia/',
+            {
+                name: socialMedia?.name,
+                username: socialMedia?.username,
+                link: socialMedia?.link,
+            }
+        )
+        .then(() => {
+            window.location.reload();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
+    const handleSocialMediaDelete = (id: number) => {
+        api.delete(`/api/users/socialmedia/${id}/`)
+        .then(() => {window.location.reload();})
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     useEffect(() => {
@@ -58,7 +88,7 @@ const UserInfoPage = () => {
         const fetchSocialMedia = async () => {
             try {
                 const response = await api.get('/api/users/socialmedia/');
-                setSocialMedia(response.data);
+                setSocialMedias(response.data);
             } catch (error) {
                 console.log(error);
             }
@@ -80,48 +110,56 @@ const UserInfoPage = () => {
                 <h1 className="site_header-title">User info</h1>
             </section>
 
-            <section className="photos container">
-                <div className="filtering row my-5">
+            <section className="userinfo container">
+                <div className="userinfo_info row my-5">
                     {editUserInfo ? 
                         <form onSubmit={(e) => updateUserInfo(e)}>
-                            <input className="mb-2" type="email" onChange={(e) => setUserInfo({...userInfo, ...{email: e.target.value} as unknown as UserInfo})} placeholder="Email" value={userInfo?.email} required/>
-                            <br />
-                            <input className="my-2" type="number" onChange={(e) => setUserInfo({...userInfo, ...{phone_number: e.target.value} as unknown as UserInfo})} placeholder="PhoneNumber" value={userInfo?.phone_number}/>
-                            <br />
-                            <input className="mt-2" type="submit" />
+                            <input className="mb-2" type="email" onChange={(e) => setUserInfo({...userInfo, ...{email: e.target.value} as unknown as UserInfo})} placeholder="Email" value={userInfo?.email} required/><br />
+                            <input type="number" onChange={(e) => setUserInfo({...userInfo, ...{phone_number: e.target.value} as unknown as UserInfo})} placeholder="PhoneNumber" value={userInfo?.phone_number}/><br />
+                            <input className="mt-2" type="submit" value='update' />
                         </form>
                         :
                         <div>
-                            <p>Email: {userInfo?.email}</p>
-                            <p>Phone Number: {userInfo?.phone_number}</p>
+                            <p>Email: <span>{userInfo?.email}</span></p>
+                            <p>Phone Number: <span>{userInfo?.phone_number}</span></p>
                             <button onClick={() => setEditUserInfo(true)}>Edit</button>
                         </div>
                     }
                 </div>
-                <div className="photos__container">
-                    {socialMedia.map((social) => {
-                        return (
-                            <div key={social.id} className="photos__container--photo d-flex justify-content-between my-3">
-                                <div className="mx-5">
-                                    <p>Name</p>
-                                    <p>{social.name}</p>
-                                </div>
-                                <div className="mx-5">
-                                    <p>Username</p>
-                                    <p>{social.username}</p>
-                                </div>
-                                <div className="mx-5">
-                                    <p>Link</p>
-                                    <p>{social.link}</p>
-                                </div>
+                <div className="row">
+                    <div className="col-6 userinfo_socialmedia__container">
+                        {socialMedias.map((social) => {
+                            return (
+                                <div key={social.id} className="userinfo_socialmedia__container--single row align-items-center my-3">
+                                    <div className="col-3">
+                                        <strong>Name</strong>
+                                        <p>{social.name}</p>
+                                    </div>
+                                    <div className="col-3">
+                                        <strong>Username</strong>
+                                        <p>{social.username}</p>
+                                    </div>
+                                    <div className="col-3">
+                                        <strong>Link</strong>
+                                        <p>{social.link}</p>
+                                    </div>
 
-                                <div className="mx-5">
-                                    {/* <button className="a-button"><a href={`/photos/${social.id}`}>Edit</a></button> */}
-                                    {/* <button onClick={() => handleDelete(social.id)}>Delete</button> */}
+                                    <div className="col-3 d-flex justify-content-center">
+                                        <button onClick={() => handleSocialMediaDelete(social.id)}>Delete</button>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })}
+                            )
+                        })}
+                    </div>
+                    <div className="col-6 userinfo_socialmedia__add d-flex flex-column align-items-center">
+                        <h3>Add social media</h3>
+                        <form onSubmit={(e) => addSocialMedia(e)}>
+                            <input className="my-2" type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{name: e.target.value} as unknown as SocialMedia})} placeholder="Name" name="name" value={socialMedia?.name} required/><br />
+                            <input className="my-2" type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{username: e.target.value} as unknown as SocialMedia})} placeholder="Username" name="username" value={socialMedia?.username} required/><br />
+                            <input className="my-2" type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{link: e.target.value} as unknown as SocialMedia})} placeholder="Link" name="link" value={socialMedia?.link} required/><br />
+                            <input className="mt-2" type="submit" value="Add" />
+                        </form>
+                    </div>
                 </div>
             </section>
         </>
