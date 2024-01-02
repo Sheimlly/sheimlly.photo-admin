@@ -53,3 +53,16 @@ export interface SessionAdd {
     name_pl: string | undefined;
     date_taken: string | undefined;
 }
+
+export interface UserInfo {
+    id: number | undefined;
+    email: string;
+    phone_number: number;
+}
+
+export interface SocialMedia {
+    id: number;
+    name: string;
+    username: string;
+    link: string;
+}

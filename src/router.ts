@@ -15,6 +15,8 @@ export type Path =
   | `/sessions`
   | `/sessions/:id`
   | `/sessions/add`
+  | `/userinfo`
+  | `/userinfo/edit`
 
 export type Params = {
   '/categories/:id': { id: string }
