@@ -8,7 +8,9 @@ export type Path =
   | `/categories`
   | `/categories/:id`
   | `/categories/add`
+  | `/forgot_password`
   | `/login`
+  | `/password_reset/:reset_token`
   | `/photos`
   | `/photos/:id`
   | `/photos/add`
@@ -17,9 +19,12 @@ export type Path =
   | `/sessions/add`
   | `/userinfo`
   | `/userinfo/edit`
+  | `/users`
+  | `/users/add`
 
 export type Params = {
   '/categories/:id': { id: string }
+  '/password_reset/:reset_token': { reset_token: string }
   '/photos/:id': { id: string }
   '/sessions/:id': { id: string }
 }
