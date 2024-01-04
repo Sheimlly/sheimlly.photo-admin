@@ -102,7 +102,7 @@ const PasswordResetForm = () => {
                         <div className="auth-container__auth-form__password-container">
                             <input className="auth-container__auth-form__password-container--input auth-container__auth-form--input" name='password' ref={passwordConfirmationRef} type={showPassword2 ? 'text' : 'password'} placeholder="Confirm password" required/>
                             <span onClick={() => setShowPassword2(!showPassword2)} className="auth-container__auth-form__password-container--show-password-icon">
-                                {showPassword ?
+                                {showPassword2 ?
                                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
                                         <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
                                             <path d="M2370 4184 c-589 -70 -1135 -342 -1715 -855 -203 -179 -537 -540
