@@ -40,7 +40,7 @@ const PasswordResetForm = () => {
         <section className="container password-reset-page">
             <div style={{height:'100vh'}} className="d-flex flex-column align-items-center justify-content-center">
                 <div className="auth-container">
-                    <h2 className="auth-container--title">Password reset</h2>
+                    <h1 className="auth-container--title">Password reset</h1>
                     <form className="auth-container__auth-form" onSubmit={(e) => handleSubmit(e)}>
                     <div className="auth-container__auth-form__password-container">
                             <input className="auth-container__auth-form__password-container--input auth-container__auth-form--input" name='password' ref={passwordRef} type={showPassword ? 'text' : 'password'} placeholder="Password" required/>
