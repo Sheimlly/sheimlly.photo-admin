@@ -4,15 +4,18 @@
 @import './pages/404.scss';
 @import './partials/header.scss';
 @import './partials/auth-form.scss';
+@import './partials/forms.scss';
 
 h1 {
     font-size: 42px;
     font-weight: 800;
+    color: #9d64b3;
 }
 
 h2 {
     font-size: 36px;
     font-weight: 700;
+    color: #9d64b3;
 }
 
 input:-webkit-autofill,

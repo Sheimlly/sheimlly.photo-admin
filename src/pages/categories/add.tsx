@@ -1,16 +1,25 @@
-import { FormEvent, useEffect, useState} from 'react';
+import { FormEvent, useEffect, useRef} from 'react';
 import { CategoryAdd } from '../../helpers/interfaces';
 import api from "../../helpers/api";
 
 const AddCategory = () => {
-    const [category, setCategory] = useState<CategoryAdd>({
-        name: undefined,
-        name_pl: undefined
-    });
+    // const [category, setCategory] = useState<CategoryAdd>({
+    //     name: undefined,
+    //     name_pl: undefined
+    // });
+
+    const categoryName = useRef<HTMLInputElement>(null)
+    const categoryNamePl = useRef<HTMLInputElement>(null)
 
     const addCategory = async (e: FormEvent) => {
         e.preventDefault();
-        await api.post('/api/photos/categories/', category);
+
+        const data : CategoryAdd = {
+            name: categoryName.current?.value,
+            name_pl: categoryNamePl.current?.value,
+        }
+
+        await api.post('/api/photos/categories/', data);
         window.location.href = '/categories';
     }
 
@@ -19,25 +28,24 @@ const AddCategory = () => {
     }, [])
 
     return (
-        <>
-            <section className="site_header container my-5">
-                <h1 className="site_header-title">Add Category</h1>
-            </section>
+        <section className='container form-page'>
+            <div className='form-page__container'>
+                <h1 className="form-page__container--title">Add Category</h1>
 
-            <section className="container edit-form">
-                <form onSubmit={(e) => addCategory(e)}>
-                    <div>
-                        <label>Name</label>
-                        <input type="text" value={category.name} onChange={(e) => {setCategory({...category, ...{name: e.target.value} as unknown as CategoryAdd})}} required />
+                <form className='form-page__container__form' onSubmit={(e) => addCategory(e)}>
+                    <input className='form-page__container__form--input' type="text" ref={categoryName} placeholder='Category name' required />
+                    <input className='form-page__container__form--input' type="text" ref={categoryNamePl} placeholder='Category name pl' required />
+                    <div className='auth-container__auth-form__submit-container'>
+                        <input className='auth-container__auth-form__submit-container--button' type='submit' value='Add category' />
+                        <span className='auth-container__auth-form__submit-container--arrow-right arrow-right'>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+                                <path opacity="1" fill="#FFFFFF" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
+                            </svg>
+                        </span>
                     </div>
-                    <div>
-                        <label>Name_pl</label>
-                        <input type="text" value={category.name_pl} onChange={(e) => {setCategory({...category, ...{name_pl: e.target.value} as unknown as CategoryAdd})}} required />
-                    </div>
-                    <input className="submit" type="submit" value='Add' />
                 </form>
-            </section>
-        </>
+            </div>
+        </section>
     )
 }
 

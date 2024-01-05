@@ -11,20 +11,25 @@ interface SessionPhoto {
 
 interface Props {
     photos: SessionPhoto[],
+    categories: Categories[],
     deletePhoto: Function
 }
 
-const PhotosList = ({photos, deletePhoto}:Props ) => {
+const PhotosList = ({photos, categories, deletePhoto}:Props ) => {
+    // const x = URL.createObjectURL(photos[0].image)
     return (
-        <>
+        <section>
             <div className="row">
-                {photos.map((photo) => {
+                {photos.map(photo => {
                     return (
                         <div className="col-3 my-3" style={{border: '1px solid gray'}}>
                             <h3 className='mb-2'>{photo.image?.name}</h3>
+                            <img src={URL.createObjectURL(photo.image)} />
                             <div className="my-2">
                                 <strong>Category</strong>
-                                <p>{photo.category}</p>
+                                {categories.map(category => {
+                                    return category.id == photo.category ? <p>{category.name}</p> : ''
+                                })}
                             </div>
                             <div>
                                 <strong>Main page</strong>
@@ -37,16 +42,16 @@ const PhotosList = ({photos, deletePhoto}:Props ) => {
                     )
                 })}
             </div>
-        </>
+        </section>
       );
 }
 
 const AddSession = () => {
-    const [session, setSession] = useState<SessionAdd>({
-        name: undefined,
-        name_pl: undefined,
-        date_taken: undefined
-    });
+    const sessionName = useRef<HTMLInputElement>(null);
+    const sessionNamePl = useRef<HTMLInputElement>(null);
+    const sessionDateTaken = useRef<HTMLInputElement>(null);
+
+
 
     const [categories, setCategories] = useState<Categories[] | []>([]);
     const [photos, setPhotos] = useState<SessionPhoto[] | []>([]);
@@ -98,17 +103,24 @@ const AddSession = () => {
     }
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (!e.target.files) return; 
-        console.log(e.target.files[0]);
+        if (!e.target.files) return;
+        
         setPhoto({
             ...photo,
             ...{image: e.target.files[0]} as unknown as SessionPhoto
         });
     }
 
-    const addCategory = async (e: FormEvent) => {
+    const addSession = async (e: FormEvent) => {
         e.preventDefault();
-        const response = await api.post('/api/photos/sessions/', session);
+
+        const data : SessionAdd = {
+            name: sessionName.current?.value,
+            name_pl: sessionNamePl.current?.value,
+            date_taken: sessionDateTaken.current?.value
+        }
+
+        const response = await api.post('/api/photos/sessions/', data);
 
         console.log(response.data);
 
@@ -144,39 +156,37 @@ const AddSession = () => {
 
     return (
         <>
-            <section className="site_header container my-5">
-                <div className='row'>
-                    <h1 className="site_header-title col-6">Add Session</h1>
-                    <h2 className="site_header-title col-6">Add session photos</h2>
-                </div>
-            </section>
-
-            <section className="container edit-form">
-                <div className='row'>
-                    <form className="col-6" onSubmit={(e) => addCategory(e)}>
-                        <div>
-                            <label>Name</label>
-                            <input type="text" onChange={(e) => {setSession({...session, ...{name: e.target.value} as unknown as SessionAdd})}} required />
+            <section className='container form-section'>
+                <div className='form-section__container'>
+                    <h1 className='form-section__container--title'>Add Session</h1>
+                    <form className='form-section__container__form' onSubmit={(e) => addSession(e)}>
+                        <input className='form-section__container__form--input' type='text' ref={sessionName} placeholder='Name' required />
+                        <input className='form-section__container__form--input' type='text' ref={sessionNamePl} placeholder='Name pl' required />
+                        <div className='form-section__container__form__date-container'>
+                            <label className='form-section__container__form__date-container--label form-section__container__form--label'>Date taken</label>
+                            <input className='form-section__container__form__date-container--input form-section__container__form--input' type='date' ref={sessionDateTaken} required />
                         </div>
-                        <div>
-                            <label>Name_pl</label>
-                            <input type="text" onChange={(e) => {setSession({...session, ...{name_pl: e.target.value} as unknown as SessionAdd})}} required />
+                        <div className='form-section__container__form__submit-container'>
+                            <input className='form-section__container__form__submit-container--button' type='submit' value='Add session' />
+                            <span className='form-section__container__form__submit-container--arrow-right arrow-right'>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+                                    <path opacity="1" fill="#FFFFFF" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
+                                </svg>
+                            </span>
                         </div>
-                        <div>
-                            <label>Date taken</label>
-                            <input type="date" onChange={(e) => {setSession({...session, ...{date_taken: e.target.value} as unknown as SessionAdd})}} required />
-                        </div>
-                        <input className="submit" type="submit" value='Add' />
                     </form>
+                </div>
 
-                    <form id="addPhoto" className="col-6" ref={photoForm} onSubmit={(e) => addPhoto(e)}>
-                        <div>
-                            <label>Image</label>
-                            <input type="file" onChange={(e) => {handleFileChange(e)}} required />
+                <div className='form-section__container'>
+                    <h2 className="form-section__container--title">Add session photos</h2>
+                    <form className='form-section__container__form' ref={photoForm} onSubmit={(e) => addPhoto(e)}>
+                        <div className='form-section__container__form__file-container'>
+                            <label className='form-section__container__form__file-container--label form-section__container__form--label'>Image</label>
+                            <input className='form-section__container__form__file-container--input form-section__container__form--input' type="file" onChange={(e) => {handleFileChange(e)}} required />
                         </div>
-                        <div>
-                            <label>Category</label>
-                            <select onChange={(e) => {setPhoto({...photo, ...{category: e.target.value} as unknown as SessionPhoto})}} required>
+                        <div className='form-section__container__form__select-container'>
+                            <label className='form-section__container__form__select-container--label form-section__container__form--label'>Category</label>
+                            <select className='form-section__container__form__select-container--select form-section__container__form--select' onChange={(e) => {setPhoto({...photo, ...{category: e.target.value} as unknown as SessionPhoto})}} required>
                                 <option value='' selected>Please select category</option>
                                 {categories.map(category => {
                                     return(
@@ -185,16 +195,23 @@ const AddSession = () => {
                                 })}
                             </select>
                         </div>
-                        <div>
-                            <label>Main page</label>
-                            <input type="checkbox" onChange={(e) => handleCheckbox(e)}/>
+                        <div className='form-section__container__form__checkbox-container'>
+                            <label className='form-section__container__form__checkbox-container--label form-section__container__form--label'>Main page</label>
+                            <input className='form-section__container__form__checkbox-container--input form-section__container__form--input' type="checkbox" onChange={(e) => handleCheckbox(e)}/>
                         </div>
-                        <input className="submit" type="submit" value='Add' />
+
+                        <div className='form-section__container__form__submit-container'>
+                            <input className='form-section__container__form__submit-container--button' type='submit' value='Add photo' />
+                            <span className='form-section__container__form__submit-container--arrow-right arrow-right'>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+                                    <path opacity="1" fill="#FFFFFF" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
+                                </svg>
+                            </span>
+                        </div>
                     </form>
                 </div>
-                <PhotosList photos={photos} deletePhoto={deletePhoto} />
-
             </section>
+            <PhotosList photos={photos} categories={categories} deletePhoto={deletePhoto} />
         </>
     )
 }
