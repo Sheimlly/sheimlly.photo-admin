@@ -55,13 +55,14 @@ export interface SessionAdd {
 }
 
 export interface UserInfo {
-    id: number | undefined;
-    email: string;
-    phone_number: number;
+    id?: number;
+    email: string | undefined;
+    phone_number: number | string | undefined;
 }
 
 export interface SocialMedia {
     id: number;
+    icon: File | string;
     name: string;
     username: string;
     link: string;

@@ -1,4 +1,4 @@
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 import api from "../../helpers/api";
 import { UserInfo, SocialMedia } from '../../helpers/interfaces';
 
@@ -8,10 +8,13 @@ const UserInfoPage = () => {
         window.location.href = '/login';
     }
 
+    const userInfoEmail = useRef<HTMLInputElement>(null);
+    const userInfoPhoneNumber = useRef<HTMLInputElement>(null)
+
     const [userInfo, setUserInfo] = useState<UserInfo | null>();
     const [socialMedia, setSocialMedia] = useState<SocialMedia | null>();
     const [socialMedias, setSocialMedias] = useState<SocialMedia[] | []>([]);
-    const [editUserInfo, setEditUserInfo] = useState(false);
+    const [editUserInfo, setEditUserInfo] = useState<boolean>(false);
 
     // const handleDelete = async (id: number) => {
     //     await api.delete(`/api/photos/${id}/`);
@@ -21,13 +24,14 @@ const UserInfoPage = () => {
 
     const updateUserInfo = (e: FormEvent) => {
         e.preventDefault();
+
+        const data : UserInfo = {
+            email: userInfoEmail.current?.value,
+            phone_number: userInfoPhoneNumber.current?.value
+        }
+
         if(userInfo?.id) {
-            api.put(`/api/users/userinfo/${userInfo.id}/`,
-                {
-                    email: userInfo.email,
-                    phone_number: userInfo.phone_number
-                }
-            )
+            api.put(`/api/users/userinfo/${userInfo.id}/`, data)
             .then(() => {
                 window.location.reload();
             })
@@ -36,12 +40,7 @@ const UserInfoPage = () => {
             });
         }
         else {
-            api.post('/api/users/userinfo/',
-                {
-                    email: userInfo?.email,
-                    phone_number: userInfo?.phone_number
-                }
-            )
+            api.post('/api/users/userinfo/', data)
             .then(() => {
                 window.location.reload();
             })
@@ -106,26 +105,53 @@ const UserInfoPage = () => {
 
     return (
         <>
-            <section className="site_header container my-5">
-                <h1 className="site_header-title">User info</h1>
-            </section>
-
-            <section className="userinfo container">
-                <div className="userinfo_info row my-5">
+            <section className='container form-section'>
+                <div className='form-section__container'>
+                    <h1 className='form-section__container--title'>User info</h1>
                     {editUserInfo ? 
-                        <form onSubmit={(e) => updateUserInfo(e)}>
-                            <input className="mb-2" type="email" onChange={(e) => setUserInfo({...userInfo, ...{email: e.target.value} as unknown as UserInfo})} placeholder="Email" value={userInfo?.email} required/><br />
-                            <input type="number" onChange={(e) => setUserInfo({...userInfo, ...{phone_number: e.target.value} as unknown as UserInfo})} placeholder="PhoneNumber" value={userInfo?.phone_number}/><br />
-                            <input className="mt-2" type="submit" value='update' />
+                        <form className='form-section__container__form' onSubmit={(e) => updateUserInfo(e)}>
+                            <input className='form-section__container__form--input' type="email" ref={userInfoEmail} placeholder="Email" required/>
+                            <input className='form-section__container__form--input' type="number" ref={userInfoPhoneNumber} placeholder="Phone number" required/>
+                            <div className='d-flex justify-content-between align-items-center'>
+                                <div className='form-section__container__form__submit-container'>
+                                    <input className='form-section__container__form__submit-container--button' type='submit' value='Update' />
+                                    <span className='form-section__container__form__submit-container--arrow-right arrow-right'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+                                            <path opacity="1" fill="#FFFFFF" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <span className='form-section__container__form__submit-container--cancel' onClick={() => setEditUserInfo(false)}>Cancel</span>
+                            </div>
                         </form>
                         :
-                        <div>
+                        <div className='form-section__container__info'>
                             <p>Email: <span>{userInfo?.email}</span></p>
                             <p>Phone Number: <span>{userInfo?.phone_number}</span></p>
-                            <button onClick={() => setEditUserInfo(true)}>Edit</button>
+                            <button className='form-section__container__info--button' onClick={() => setEditUserInfo(true)}>Edit</button>
                         </div>
                     }
                 </div>
+
+                <div className='form-section__container'>
+                    <h2 className='form-section__container--title'>Add social media</h2>
+                    <form className='form-section__container__form' onSubmit={(e) => addSocialMedia(e)}>
+                        <input className='form-section__container__form--input' type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{name: e.target.value} as unknown as SocialMedia})} placeholder="Name" name="name" value={socialMedia?.name} required/><br />
+                        <input className='form-section__container__form--input' type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{username: e.target.value} as unknown as SocialMedia})} placeholder="Username" name="username" value={socialMedia?.username} required/><br />
+                        <input className='form-section__container__form--input' type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{link: e.target.value} as unknown as SocialMedia})} placeholder="Link" name="link" value={socialMedia?.link} required/><br />
+                        <div className='form-section__container__form__submit-container'>
+                            <input className='form-section__container__form__submit-container--button' type='submit' value='Add' />
+                            <span className='form-section__container__form__submit-container--arrow-right arrow-right'>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+                                    <path opacity="1" fill="#FFFFFF" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section>
                 <div className="row">
                     <div className="col-6 userinfo_socialmedia__container">
                         {socialMedias.map((social) => {
@@ -150,15 +176,6 @@ const UserInfoPage = () => {
                                 </div>
                             )
                         })}
-                    </div>
-                    <div className="col-6 userinfo_socialmedia__add d-flex flex-column align-items-center">
-                        <h3>Add social media</h3>
-                        <form onSubmit={(e) => addSocialMedia(e)}>
-                            <input className="my-2" type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{name: e.target.value} as unknown as SocialMedia})} placeholder="Name" name="name" value={socialMedia?.name} required/><br />
-                            <input className="my-2" type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{username: e.target.value} as unknown as SocialMedia})} placeholder="Username" name="username" value={socialMedia?.username} required/><br />
-                            <input className="my-2" type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{link: e.target.value} as unknown as SocialMedia})} placeholder="Link" name="link" value={socialMedia?.link} required/><br />
-                            <input className="mt-2" type="submit" value="Add" />
-                        </form>
                     </div>
                 </div>
             </section>
