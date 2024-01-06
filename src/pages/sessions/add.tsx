@@ -16,27 +16,35 @@ interface Props {
 }
 
 const PhotosList = ({photos, categories, deletePhoto}:Props ) => {
+    const div_ref = useRef<HTMLDivElement | null>(null);
+    const [imageWidth, setImageWidth] = useState<number>(0);
+
+    const setRefElement = (el: HTMLDivElement) => {
+        if (!el) return;
+        div_ref.current = el;
+        setImageWidth(el.offsetWidth);
+    };
+
+    window.addEventListener('resize', () => {
+        if (div_ref.current) {
+            setImageWidth(div_ref.current.offsetWidth)
+        }
+    })
+
     // const x = URL.createObjectURL(photos[0].image)
     return (
-        <section>
-            <div className="row">
-                {photos.map(photo => {
+        <section className='container photos-section '>
+            <div className='row photos-section__container'>
+                {photos.map((photo, index) => {
                     return (
-                        <div className="col-3 my-3" style={{border: '1px solid gray'}}>
-                            <h3 className='mb-2'>{photo.image?.name}</h3>
-                            <img src={URL.createObjectURL(photo.image)} />
-                            <div className="my-2">
-                                <strong>Category</strong>
+                        <div className="photos-section__container--photo col-4" ref={ref => { ref && index === photos.length - 1 && setRefElement(ref) }} key={index} style={{'height':imageWidth}}>
+                            <img className='photo_with_info' src={URL.createObjectURL(photo.image)} />
+                            <div className='photos-section__container--photo__photo-info' style={{'display':'flex', 'height':imageWidth, 'width':imageWidth}}>
                                 {categories.map(category => {
-                                    return category.id == photo.category ? <p>{category.name}</p> : ''
+                                    return category.id == photo.category ? <p className='photos-section__container__photo-info--category'>Category: <span>{category.name}</span></p> : ''
                                 })}
-                            </div>
-                            <div>
-                                <strong>Main page</strong>
-                                <p>{photo.main_page ? 'True' : 'False'}</p>
-                            </div>
-                            <div className="mt-2">
-                                <button onClick={() => deletePhoto(photo)}>Delete</button>
+                                <p className='photos-section__container--photo__photo-info--main-page'>Main Page: <span>{photo.main_page ? 'True' : 'False'}</span></p>
+                                <button className='photos-section__container--photo__photo-info--button' onClick={() => deletePhoto(photo)}>Delete</button>
                             </div>
                         </div>
                     )
