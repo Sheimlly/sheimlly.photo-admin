@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef, FormEvent } from "react";
+import { useState, useEffect, useRef, FormEvent, ChangeEvent } from "react";
 import api from "../../helpers/api";
-import { UserInfo, SocialMedia } from '../../helpers/interfaces';
+import { UserInfo, SocialMedia, AddSocialMedia } from '../../helpers/interfaces';
 
 const UserInfoPage = () => {
     const token = localStorage.getItem("token");
@@ -12,7 +12,8 @@ const UserInfoPage = () => {
     const userInfoPhoneNumber = useRef<HTMLInputElement>(null)
 
     const [userInfo, setUserInfo] = useState<UserInfo | null>();
-    const [socialMedia, setSocialMedia] = useState<SocialMedia | null>();
+    const [socialMedia, setSocialMedia] = useState<AddSocialMedia | null>();
+    
     const [socialMedias, setSocialMedias] = useState<SocialMedia[] | []>([]);
     const [editUserInfo, setEditUserInfo] = useState<boolean>(false);
 
@@ -50,13 +51,28 @@ const UserInfoPage = () => {
         }
     }
 
+    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files) return;
+        
+        setSocialMedia({
+            ...socialMedia,
+            ...{icon: e.target.files[0]} as unknown as AddSocialMedia
+        });
+    }
+
     const addSocialMedia = (e: FormEvent) => {
         e.preventDefault();
         api.post('/api/users/socialmedia/',
             {
                 name: socialMedia?.name,
+                icon: socialMedia?.icon,
                 username: socialMedia?.username,
                 link: socialMedia?.link,
+            },
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
             }
         )
         .then(() => {
@@ -99,14 +115,10 @@ const UserInfoPage = () => {
         fetchSocialMedia();
     }, []);
 
-    // useEffect(() => {
-    //     fetchPhotos();
-    // }, [filters]);
-
     return (
         <>
-            <section className='container form-section'>
-                <div className='form-section__container'>
+            <section className='container form-section my-5'>
+                <div className='form-section__container user-info-form-container'>
                     <h1 className='form-section__container--title'>User info</h1>
                     {editUserInfo ? 
                         <form className='form-section__container__form' onSubmit={(e) => updateUserInfo(e)}>
@@ -133,12 +145,16 @@ const UserInfoPage = () => {
                     }
                 </div>
 
-                <div className='form-section__container'>
+                <div className='form-section__container user-info-form-container'>
                     <h2 className='form-section__container--title'>Add social media</h2>
                     <form className='form-section__container__form' onSubmit={(e) => addSocialMedia(e)}>
-                        <input className='form-section__container__form--input' type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{name: e.target.value} as unknown as SocialMedia})} placeholder="Name" name="name" value={socialMedia?.name} required/><br />
-                        <input className='form-section__container__form--input' type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{username: e.target.value} as unknown as SocialMedia})} placeholder="Username" name="username" value={socialMedia?.username} required/><br />
-                        <input className='form-section__container__form--input' type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{link: e.target.value} as unknown as SocialMedia})} placeholder="Link" name="link" value={socialMedia?.link} required/><br />
+                        <input className='form-section__container__form--input' type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{name: e.target.value} as unknown as AddSocialMedia})} placeholder="Name" name="name" value={socialMedia?.name} required/>
+                        <div className='form-section__container__form__file-container'>
+                            <label className='form-section__container__form__file-container--label form-section__container__form--label'>Image</label>
+                            <input className='form-section__container__form__file-container--input form-section__container__form--input' type="file" onChange={(e) => {handleFileChange(e)}} required />
+                        </div>
+                        <input className='form-section__container__form--input' type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{username: e.target.value} as unknown as AddSocialMedia})} placeholder="Username" name="username" value={socialMedia?.username} required/>
+                        <input className='form-section__container__form--input' type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{link: e.target.value} as unknown as AddSocialMedia})} placeholder="Link" name="link" value={socialMedia?.link} required/>
                         <div className='form-section__container__form__submit-container'>
                             <input className='form-section__container__form__submit-container--button' type='submit' value='Add' />
                             <span className='form-section__container__form__submit-container--arrow-right arrow-right'>
@@ -151,32 +167,25 @@ const UserInfoPage = () => {
                 </div>
             </section>
 
-            <section>
-                <div className="row">
-                    <div className="col-6 userinfo_socialmedia__container">
-                        {socialMedias.map((social) => {
-                            return (
-                                <div key={social.id} className="userinfo_socialmedia__container--single row align-items-center my-3">
-                                    <div className="col-3">
-                                        <strong>Name</strong>
-                                        <p>{social.name}</p>
-                                    </div>
-                                    <div className="col-3">
-                                        <strong>Username</strong>
-                                        <p>{social.username}</p>
-                                    </div>
-                                    <div className="col-3">
-                                        <strong>Link</strong>
-                                        <p>{social.link}</p>
-                                    </div>
-
-                                    <div className="col-3 d-flex justify-content-center">
-                                        <button onClick={() => handleSocialMediaDelete(social.id)}>Delete</button>
-                                    </div>
+            <section className='socials-section container my-5'>
+                <h3 className='socials-section--title'>Social Medias</h3>
+                <div className='row socials-section__container'>
+                    {socialMedias.map((social) => {
+                        return (
+                            <div key={social.id} className='socials-section__container__social col-3 mx-1 my-5'>
+                                <img className='socials-section__container__social--icon' src={social.icon} />
+                                <div className='socials-section__container__social--info'>
+                                    <strong>Name</strong>
+                                    <p>{social.name}</p>
                                 </div>
-                            )
-                        })}
-                    </div>
+                                <div className='socials-section__container__social--info'>
+                                    <strong>Username</strong>
+                                    <a href={social.link}>{social.username}</a>
+                                </div>
+                                <button className='socials-section__container__social--button' onClick={() => handleSocialMediaDelete(social.id)}>Delete</button>
+                            </div>
+                        )
+                    })}
                 </div>
             </section>
         </>

@@ -62,8 +62,15 @@ export interface UserInfo {
 
 export interface SocialMedia {
     id: number;
-    icon: File | string;
+    icon: string;
     name: string;
     username: string;
     link: string;
+}
+
+export interface AddSocialMedia {
+    icon: File | undefined;
+    name: string | undefined;
+    username: string | undefined;
+    link: string | undefined;
 }

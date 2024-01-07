@@ -18,7 +18,6 @@ export type Path =
   | `/sessions/:id`
   | `/sessions/add`
   | `/userinfo`
-  | `/userinfo/edit`
   | `/users`
   | `/users/add`
 
