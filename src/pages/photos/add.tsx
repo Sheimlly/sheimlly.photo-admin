@@ -81,19 +81,18 @@ const AddPhoto = () => {
     }, []);
 
     return (
-        <>
-            <section className="site_header container my-5">
-                <h1 className="site_header-title">Add photo</h1>
-            </section>
-            <section className='container edit-form'>
-                <form onSubmit={(e) => addPhoto(e)}>
-                    <div>
-                        <label>Image</label>
-                        <input type='file' onChange={(e) => {handleFileChange(e)}} required />
+        <section className='container form-section addphoto-page'>
+            <div className='form-section__container'>
+                <h1 className='form-section__container--title'>Add photo</h1>
+                <form className='form-section__container__form' onSubmit={(e) => addPhoto(e)}>
+                    <div className='form-section__container__form__file-container'>
+                        <label className='form-section__container__form__file-container--label form-section__container__form--label'>Image</label>
+                        <input className='form-section__container__form__file-container--input form-section__container__form--input' type="file" onChange={(e) => {handleFileChange(e)}} required />
                     </div>
-                    <div className="">
-                        <label>Category:</label>
-                        <select onChange={(e) => {setPhoto({...photo, ...{category: e.target.value} as unknown as PhotoAdd})}}>
+                    <div className='form-section__container__form__select-container'>
+                        <label className='form-section__container__form__select-container--label form-section__container__form--label'>Category</label>
+                        <select className='form-section__container__form__select-container--select form-section__container__form--select' onChange={(e) => {setPhoto({...photo, ...{category: e.target.value} as unknown as PhotoAdd})}} required>
+                            <option value='' selected>Please select category</option>
                             {categories.map(category => {
                                 return(
                                     <option key={category.id} value={category.id}>{category.name}</option>
@@ -101,10 +100,10 @@ const AddPhoto = () => {
                             })}
                         </select>
                     </div>
-                    <div className="">
-                        <label>Session:</label>
-                        <select onChange={(e) => {setPhoto({...photo, ...{session: e.target.value} as unknown as PhotoAdd})}}>
-                            <option value='None'>None</option>
+                    <div className='form-section__container__form__select-container'>
+                        <label className='form-section__container__form__select-container--label form-section__container__form--label'>Session</label>
+                        <select className='form-section__container__form__select-container--select form-section__container__form--select' onChange={(e) => {setPhoto({...photo, ...{category: e.target.value} as unknown as PhotoAdd})}} required>
+                            <option value='' selected>Please select session</option>
                             {sessions.map(session => {
                                 return(
                                     <option key={session.id} value={session.id}>{session.name}</option>
@@ -112,19 +111,26 @@ const AddPhoto = () => {
                             })}
                         </select>
                     </div>
-                    <div className="">
-                        <label>Date created:</label>
-                        <input type="date" onChange={(e) => {setPhoto({...photo, ...{date_created: e.target.value} as unknown as PhotoAdd})}} defaultValue={photo.date_created} />
-                    </div>
-                    <div className="">
-                        <label>Main page:</label>
-                        <input type="checkbox" onChange={(e) => handleCheckbox(e)} checked={photo.main_page ? true : false} />
+                    <div className='form-section__container__form__date-container'>
+                            <label className='form-section__container__form__date-container--label form-section__container__form--label'>Date taken</label>
+                            <input className='form-section__container__form__date-container--input form-section__container__form--input' type='date' onChange={(e) => {setPhoto({...photo, ...{date_created: e.target.value} as unknown as PhotoAdd})}} defaultValue={photo.date_created} />
+                        </div>
+                    <div className='form-section__container__form__checkbox-container'>
+                        <label className='form-section__container__form__checkbox-container--label form-section__container__form--label'>Main page</label>
+                        <input className='form-section__container__form__checkbox-container--input form-section__container__form--input' type="checkbox" onChange={(e) => handleCheckbox(e)}/>
                     </div>
 
-                    <input className="submit" type="submit" value='Add' />
+                    <div className='form-section__container__form__submit-container'>
+                        <input className='form-section__container__form__submit-container--button' type='submit' value='Add photo' />
+                        <span className='form-section__container__form__submit-container--arrow-right arrow-right'>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+                                <path opacity="1" fill="#FFFFFF" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
+                            </svg>
+                        </span>
+                    </div>
                 </form>
-            </section>
-        </>
+            </div>
+        </section>
     );
 }
 
