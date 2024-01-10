@@ -150,7 +150,7 @@ const PhotosPage = () => {
                 </div>
             </section>
 
-            <section className='container photos-section my-5'>
+            <section className='container photo-page photos-section my-5'>
                 <div className='row photos-section__container'>
                     {photos.map((photo, index) => {
                         return (
@@ -161,6 +161,7 @@ const PhotosPage = () => {
                                     {photo.session_name ? <p className='photos-section__container__photo-info--category'>{photo.session_name}</p> : ''}
                                     <p className='photos-section__container__photo-info--category'>{photo.date_created}</p>
                                     <p className='photos-section__container--photo__photo-info--main-page'>Main Page: <span>{photo.main_page ? 'True' : 'False'}</span></p>
+                                    <a href={`/photos/${photo.id}`} className='photos-section__container--photo__photo-info--button'>Edit</a>
                                     <button className='photos-section__container--photo__photo-info--button' onClick={() => handleDelete(photo.id)}>Delete</button>
                                 </div>
                             </div>
