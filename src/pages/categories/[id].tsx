@@ -55,7 +55,7 @@ const EditCategory = () => {
     }, []);
 
     return (
-        <section className="form-section container">
+        <section className="form-section container my-5">
             <div className="form-section__container">
                 <h1 className="form-section__container--title">Edit category</h1>
                 <form className="form-section__container__form" onSubmit={(e) => handleUpdate(e)}>
