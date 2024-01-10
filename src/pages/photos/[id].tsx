@@ -101,18 +101,18 @@ const EditPhoto = () => {
     return (
         <>
             <section className="site_header container my-5">
-                <h1 className="site_header-title">Edit photo</h1>
+                <h1>Edit Photo</h1>
             </section>
 
-            <section className="container">
+            <section className="form-section container">
                 {photo &&
-                    <div className="row justify-content-between my-3">
+                    <div className="row form-section__container edit-photo__container justify-content-between my-3">
                         <img className="col-6" src={image} />
-                        <div className="col-6 px-5 edit-form">
-                            <form onSubmit={(e) => handleUpdate(e)}>
-                                <div className="">
-                                    <label>Category:</label>
-                                    <select onChange={(e) => {setPhoto({...photo, ...{category: e.target.value} as unknown as Photo})}}>
+                        <div className="col-6 ">
+                            <form className='form-section__container__form' onSubmit={(e) => handleUpdate(e)}>
+                                <div className='form-section__container__form__select-container'>
+                                    <label className='form-section__container__form__select-container--label form-section__container__form--label'>Category</label>
+                                    <select className='form-section__container__form__select-container--select form-section__container__form--select' onChange={(e) => {setPhoto({...photo, ...{category: e.target.value} as unknown as Photo})}}>
                                         {categories.map(category => {
                                             return(
                                                 <option key={category.id} value={category.id} selected={category.id == photo.category}>{category.name}</option>
@@ -120,9 +120,9 @@ const EditPhoto = () => {
                                         })}
                                     </select>
                                 </div>
-                                <div className="">
-                                    <label>Session:</label>
-                                    <select onChange={(e) => {setPhoto({...photo, ...{session: e.target.value} as unknown as Photo})}}>
+                                <div className='form-section__container__form__select-container'>
+                                    <label className='form-section__container__form__select-container--label form-section__container__form--label'>Session</label>
+                                    <select className='form-section__container__form__select-container--select form-section__container__form--select' onChange={(e) => {setPhoto({...photo, ...{session: e.target.value} as unknown as Photo})}}>
                                         <option>None</option>
                                         {sessions.map(session => {
                                             return(
@@ -131,20 +131,25 @@ const EditPhoto = () => {
                                         })}
                                     </select>
                                 </div>
-                                <div className="">
-                                    <label>Date created:</label>
-                                    <input type="date" onChange={(e) => {setPhoto({...photo, ...{date_created: e.target.value} as unknown as Photo})}} defaultValue={photo.date_created} />
+                                <div className='form-section__container__form__date-container'>
+                                    <label className='form-section__container__form__date-container--label form-section__container__form--label'>Date created</label>
+                                    <input className='form-section__container__form__date-container--input form-section__container__form--input' type="date" onChange={(e) => {setPhoto({...photo, ...{date_created: e.target.value} as unknown as Photo})}} defaultValue={photo.date_created} />
                                 </div>
-                                <div className="">
-                                    <label>Main page:</label>
-                                    <input type="checkbox" onChange={(e) => handleCheckbox(e)} checked={photo.main_page ? true : false} />
+                                <div className='form-section__container__form__checkbox-container'>
+                                    <label className='form-section__container__form__checkbox-container--label form-section__container__form--label'>Main page</label>
+                                    <input className='form-section__container__form__checkbox-container--input form-section__container__form--input' type="checkbox" onChange={(e) => handleCheckbox(e)} checked={photo.main_page ? true : false} />
                                 </div>
 
-                                <input className="submit" type="submit" value='Update' />
+                                <div className='form-section__container__form__submit-container'>
+                                    <input className='form-section__container__form__submit-container--button' type='submit' value='Update' />
+                                    <span className='form-section__container__form__submit-container--arrow-right arrow-right'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+                                            <path opacity="1" fill="#FFFFFF" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
+                                        </svg>
+                                    </span>
+                                </div>
                             </form>
-                            <div className="mt-5">
-                                <button onClick={handleDelete}>Delete</button>
-                            </div>
+                            <p className="delete-button" onClick={handleDelete}>Delete</p>
                         </div>
                     </div>
                 }

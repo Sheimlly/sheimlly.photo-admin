@@ -267,3 +267,15 @@
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
+.edit-photo__container {
+    flex-direction: row;
+}
+
+.delete-button {
+    text-decoration: underline;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
