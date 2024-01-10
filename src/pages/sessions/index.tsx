@@ -63,15 +63,18 @@ const SessionsPage = () => {
                 <h1 className="site_header-title">Sessions</h1>
             </section>
 
-            <section className="container">
-            <div className="add-instance"><a href='/sessions/add'>+ Add session</a></div>
-                <div className="filtering row my-5">
-                    <div className="col-3">
-                        <p>Session name</p>
-                        <input onChange={(e) => { setSearch(e.target.value) }} type="text" value={search} />
+            <section className="filters-section container">
+                <div className='filters-section__container'>
+                    <h3 className='filters-section--title'>Filters</h3>
+
+                    <div className='filters-section__container__filters'>
+                        <input className='filters-section__container__filters--input' onChange={(e) => { setSearch(e.target.value) }} type="text" value={search} placeholder='Name'/>
+                        <button className='filters-section__container__filters--button'><a href='/sessions/add'>Add Session</a></button>
                     </div>
                 </div>
+            </section>
 
+            <section className="container">
                 <div className="photos__container">
                     {sessions.map((session) => {
                         return (

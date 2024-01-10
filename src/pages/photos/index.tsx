@@ -94,42 +94,48 @@ const PhotosPage = () => {
                 <h1 className="site_header-title">Photos</h1>
             </section>
 
-            <section className="photos container">
-                <div className="add-instance"><a href='/photos/add'>+ Add Photo</a></div>
-                <div className="filtering row my-5">
-                    <div className="col-3">
-                        <p>Photo name</p>
-                        <input onChange={(e) => { handleFilterChange('search', e.target.value) }} type="text" value={filters?.search} />
-                    </div>
+            <section className="filters-section container">
+                <div className='filters-section__container'>
+                    <h3 className='filters-section--title'>Filters</h3>
 
-                    <div className="col-2">
-                        <p>Photo category</p>
-                        <select onChange={(e) => { handleFilterChange('category', e.target.value) }} >
-                            <option value='None'>None</option>
-                            {categories.map(category => {
-                                return(
-                                    <option key={category.id} value={category.id}>{category.name}</option>
-                                )
-                            })}
-                        </select>
-                    </div>
-
-                    <div className="col-2">
-                        <p>Photo session</p>
-                        <select onChange={(e) => { handleFilterChange('session', e.target.value) }} >
-                            <option value='None'>None</option>
-                            {sessions.map(session => {
-                                return(
-                                    <option key={session.id} value={session.id}>{session.name}</option>
-                                )
-                            })}
-                        </select>
-                    </div>
-                    <div className="col-2">
-                        <p>Main page</p>
-                        <input type="checkbox" onChange={(e) => handleCheckbox(e)} />
+                    <div className='filters-section__container__filters photo-filters'>
+                        <input className='filters-section__container__filters--input' onChange={(e) => { handleFilterChange('search', e.target.value) }} type="text" value={filters?.search} placeholder='Name'/>
+                        
+                        <div className='filters-section__container__filters__select-container'>
+                            <p className='filters-section__container__filters__select-container--text'>Photo category</p>
+                            <select className='filters-section__container__filters__select-container--select filters-section__container__filters--select' onChange={(e) => { handleFilterChange('category', e.target.value) }} >
+                                <option value='None'>None</option>
+                                {categories.map(category => {
+                                    return(
+                                        <option key={category.id} value={category.id}>{category.name}</option>
+                                    )
+                                })}
+                            </select>
+                        </div>
+                        
+                        <div className='filters-section__container__filters__select-container'>
+                            <p className='filters-section__container__filters__select-container--text'>Photo session</p>
+                            <select className='filters-section__container__filters__select-container--select filters-section__container__filters--select' onChange={(e) => { handleFilterChange('session', e.target.value) }} >
+                                <option value='None'>None</option>
+                                {sessions.map(session => {
+                                    return(
+                                        <option key={session.id} value={session.id}>{session.name}</option>
+                                    )
+                                })}
+                            </select>
+                        </div>
+                        
+                        <div className='filters-section__container__filters__checkbox-container'>
+                            <p className='filters-section__container__filters__select-container--text'>Main page</p>
+                            <input className='filters-section__container__filters__checkbox-container--input' type="checkbox" onChange={(e) => handleCheckbox(e)} />
+                        </div>
+                        
+                        <button className='filters-section__container__filters--button'><a href='/photos/add'>Add Photo</a></button>
                     </div>
                 </div>
+            </section>
+
+            <section className="photos container">
                 <div className="photos__container">
                     {photos.map((photo) => {
                         return (
