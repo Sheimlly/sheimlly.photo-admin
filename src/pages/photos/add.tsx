@@ -102,7 +102,7 @@ const AddPhoto = () => {
                     </div>
                     <div className='form-section__container__form__select-container'>
                         <label className='form-section__container__form__select-container--label form-section__container__form--label'>Session</label>
-                        <select className='form-section__container__form__select-container--select form-section__container__form--select' onChange={(e) => {setPhoto({...photo, ...{category: e.target.value} as unknown as PhotoAdd})}} required>
+                        <select className='form-section__container__form__select-container--select form-section__container__form--select' onChange={(e) => {setPhoto({...photo, ...{session: e.target.value} as unknown as PhotoAdd})}}>
                             <option value='' selected>Please select session</option>
                             {sessions.map(session => {
                                 return(

@@ -130,7 +130,7 @@ const PhotosPage = () => {
                             <input className='filters-section__container__filters__checkbox-container--input' type="checkbox" onChange={(e) => handleCheckbox(e)} />
                         </div>
                         
-                        <button className='filters-section__container__filters--button'><a href='/photos/add'>Add Photo</a></button>
+                        <a href='/photos/add' className='filters-section__container__filters--button'>Add Photo</a>
                     </div>
                 </div>
             </section>

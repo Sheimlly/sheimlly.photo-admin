@@ -69,7 +69,7 @@ const SessionsPage = () => {
 
                     <div className='filters-section__container__filters'>
                         <input className='filters-section__container__filters--input' onChange={(e) => { setSearch(e.target.value) }} type="text" value={search} placeholder='Name'/>
-                        <button className='filters-section__container__filters--button'><a href='/sessions/add'>Add Session</a></button>
+                        <a href='/sessions/add' className='filters-section__container__filters--button'>Add Session</a>
                     </div>
                 </div>
             </section>
