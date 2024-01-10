@@ -55,33 +55,30 @@ const EditCategory = () => {
     }, []);
 
     return (
-        <>
-            <section className="site_header container my-5">
-                <h1 className="site_header-title">Edit category</h1>
-            </section>
+        <section className="form-section container">
+            <div className="form-section__container">
+                <h1 className="form-section__container--title">Edit category</h1>
+                <form className="form-section__container__form" onSubmit={(e) => handleUpdate(e)}>
+                    <label className="form-section__container__form--label">Name</label>
+                    <input className="form-section__container__form--input" type="text" value={category?.name} onChange={(e) => {setCategory({...category, ...{name: e.target.value} as unknown as Categories})}} placeholder="Name"/>
+                    <label className="form-section__container__form--label">Name pl</label>
+                    <input className="form-section__container__form--input" type="text" value={category?.name_pl} onChange={(e) => {setCategory({...category, ...{name_pl: e.target.value} as unknown as Categories})}} placeholder="Name pl"/>
 
-            <section className="container edit-form">
-                <form onSubmit={(e) => handleUpdate(e)}>
-                    <div>
-                        <label>Name</label>
-                        <input type="text" value={category?.name} onChange={(e) => {setCategory({...category, ...{name: e.target.value} as unknown as Categories})}} />
+                    <div className='form-section__container__form__submit-container'>
+                        <input className='form-section__container__form__submit-container--button' type='submit' value='Update' />
+                        <span className='form-section__container__form__submit-container--arrow-right arrow-right'>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+                                <path opacity="1" fill="#FFFFFF" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
+                            </svg>
+                        </span>
                     </div>
-
-                    <div>
-                        <label>Name_pl</label>
-                        <input type="text" value={category?.name_pl} onChange={(e) => {setCategory({...category, ...{name_pl: e.target.value} as unknown as Categories})}} />
-                    </div>
-
-                    <input className="submit" type="submit" value='Update' />
                 </form>
 
                 {category?.able_to_delete &&
-                    <div className="mt-5">
-                        <button onClick={handleDelete}>Delete</button>
-                    </div>
+                    <p className="delete-button mt-3" onClick={handleDelete}>Delete</p>
                 }
-            </section>
-        </>
+            </div>
+        </section>
     );
 }
 
