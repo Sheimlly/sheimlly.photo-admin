@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent, useRef } from "react";
 import api from "../../helpers/api";
 import { Photos, Categories, Sessions, PhotoFilters } from '../../helpers/interfaces';
 
@@ -59,6 +59,21 @@ const PhotosPage = () => {
             });
         }
     }
+
+    const div_ref = useRef<HTMLDivElement | null>(null);
+    const [imageWidth, setImageWidth] = useState<number>(0);
+
+    const setRefElement = (el: HTMLDivElement) => {
+        if (!el) return;
+        div_ref.current = el;
+        setImageWidth(el.offsetWidth);
+    };
+
+    window.addEventListener('resize', () => {
+        if (div_ref.current) {
+            setImageWidth(div_ref.current.offsetWidth)
+        }
+    })
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -135,31 +150,18 @@ const PhotosPage = () => {
                 </div>
             </section>
 
-            <section className="photos container">
-                <div className="photos__container">
-                    {photos.map((photo) => {
+            <section className='container photos-section my-5'>
+                <div className='row photos-section__container'>
+                    {photos.map((photo, index) => {
                         return (
-                            <div key={photo.id} className="photos__container--photo d-flex justify-content-between my-3">
-                                <img src={photo.image} />
-                                <div className="mx-5">
-                                    <p>Name</p>
-                                    <p>{photo.name}</p>
-                                </div>
-                                <div className="mx-5">
-                                    <p>Category</p>
-                                    <p>{photo.category_name}</p>
-                                </div>
-                                <div className="mx-5">
-                                    <p>Session</p>
-                                    <p>{photo.session_name ? photo.session_name : '-'}</p>
-                                </div>
-                                <div className="mx-5">
-                                    <p>Main page</p>
-                                    <p>{photo.main_page ? 'True' : 'False'}</p>
-                                </div>
-                                <div className="mx-5">
-                                    <button className="a-button"><a href={`/photos/${photo.id}`}>Edit</a></button>
-                                    <button onClick={() => handleDelete(photo.id)}>Delete</button>
+                            <div className="photos-section__container--photo col-4" ref={ref => { ref && index === photos.length - 1 && setRefElement(ref) }} key={index} style={{'height':imageWidth}}>
+                                <img className='photo_with_info' src={photo.image} />
+                                <div className='photos-section__container--photo__photo-info' style={{'display':'flex', 'height':imageWidth, 'width':imageWidth}}>
+                                    <p className='photos-section__container__photo-info--category'>{photo.category_name}</p>
+                                    {photo.session_name ? <p className='photos-section__container__photo-info--category'>{photo.session_name}</p> : ''}
+                                    <p className='photos-section__container__photo-info--category'>{photo.date_created}</p>
+                                    <p className='photos-section__container--photo__photo-info--main-page'>Main Page: <span>{photo.main_page ? 'True' : 'False'}</span></p>
+                                    <button className='photos-section__container--photo__photo-info--button' onClick={() => handleDelete(photo.id)}>Delete</button>
                                 </div>
                             </div>
                         )
