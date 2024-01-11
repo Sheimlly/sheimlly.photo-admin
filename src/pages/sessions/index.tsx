@@ -74,28 +74,27 @@ const SessionsPage = () => {
                 </div>
             </section>
 
-            <section className="container">
-                <div className="photos__container">
+            <section className="session-section container my-5">
+                <div className="session-section__container row">
                     {sessions.map((session) => {
                         return (
-                            <div key={session.id} className="photos__container--photo d-flex justify-content-between my-3">
-                                <img src={session.image} />
-                                <div className="mx-5">
-                                    <p>Name</p>
-                                    <p>{session.name}</p>
+                            <div key={session.id} className="session-section__container__session col-12 my-3">
+                                <img className="session-section__container__session--image" src={session.image} />
+                                <div className="session-section__container__session__text-container">
+                                    <p className="session-section__container__session__text-container--name">Name</p>
+                                    <p className="session-section__container__session__text-container--value">{session.name}</p>
                                 </div>
-                                <div className="mx-5">
-                                    <p>Name_pl</p>
-                                    <p>{session.name_pl}</p>
+                                <div className="session-section__container__session__text-container">
+                                    <p className="session-section__container__session__text-container--name">Name_pl</p>
+                                    <p className="session-section__container__session__text-container--value">{session.name_pl}</p>
                                 </div>
-                                <div className="mx-5">
-                                    <p>Date taken</p>
-                                    <p>{session.date_taken}</p>
+                                <div className="session-section__container__session__text-container">
+                                    <p className="session-section__container__session__text-container--name">Date taken</p>
+                                    <p className="session-section__container__session__text-container--value">{session.date_taken}</p>
                                 </div>
-                                <div className="mx-5">
-                                    <button className="a-button"><a href={`/sessions/${session.id}`}>Edit</a></button>
-                                    <button onClick={() => handleDelete(session.id)}>Delete with all photos</button>
-                                    {/* <button onClick={() => handleRemoveFromMainPage(photo.id)}>Remove from main page</button> */}
+                                <div className="session-section__container__session__buttons-container">
+                                    <a className="session-section__container__session__buttons-container--edit" href={`/sessions/${session.id}`}>Edit</a>
+                                    <p className="session-section__container__session__buttons-container--delete delete-button" onClick={() => handleDelete(session.id)}>Delete with all photos</p>
                                 </div>
                             </div>
                         )

@@ -162,7 +162,7 @@ const PhotosPage = () => {
                                     <p className='photos-section__container__photo-info--category'>{photo.date_created}</p>
                                     <p className='photos-section__container--photo__photo-info--main-page'>Main Page: <span>{photo.main_page ? 'True' : 'False'}</span></p>
                                     <a href={`/photos/${photo.id}`} className='photos-section__container--photo__photo-info--button'>Edit</a>
-                                    <button className='photos-section__container--photo__photo-info--button' onClick={() => handleDelete(photo.id)}>Delete</button>
+                                    <span className='photos-section__container--photo__photo-info--delete delete-button' onClick={() => handleDelete(photo.id)}>Delete</span>
                                 </div>
                             </div>
                         )

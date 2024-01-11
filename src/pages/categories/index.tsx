@@ -85,7 +85,7 @@ const CategoriesPage = () => {
                                 </div>
                                 <a className='categories-section__container__category--button' href={`/categories/${category.id}`}>Edit</a>
                                 { category.able_to_delete &&
-                                    <p className='categories-section__container__category--delete' onClick={() => {handleDelete(category.id)}}>Delete</p>
+                                    <p className='categories-section__container__category--delete delete-button' onClick={() => {handleDelete(category.id)}}>Delete</p>
                                 }
                             </div>
                         )
