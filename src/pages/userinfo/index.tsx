@@ -17,12 +17,6 @@ const UserInfoPage = () => {
     const [socialMedias, setSocialMedias] = useState<SocialMedia[] | []>([]);
     const [editUserInfo, setEditUserInfo] = useState<boolean>(false);
 
-    // const handleDelete = async (id: number) => {
-    //     await api.delete(`/api/photos/${id}/`);
-    //     window.location.reload();
-    // }
-
-
     const updateUserInfo = (e: FormEvent) => {
         e.preventDefault();
 
