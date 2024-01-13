@@ -117,7 +117,7 @@ const LoginForm = () => {
                             </span>
                         </div>
                     </form>
-                    <button className="auth-container__extra-button" onClick={() => window.location.href = '/forgot_password'}>Forgot password</button>
+                    <button className="form-section__container__extra-button" onClick={() => window.location.href = '/forgot_password'}>Forgot password</button>
                 </div>
         </section>
     )

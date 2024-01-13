@@ -12,15 +12,12 @@ const Header = () => {
                 </h1>
             </div>
             <div className="navigation-panel">
-                <div className="container">
-                    <div className="row justify-content-center justify-content-md-between">
-                        <p className='col-12 col-lg-2'><a href='/photos'>Photos</a></p>
-                        <p className='col-12 col-lg-3'><a href='/categories'>Categories</a></p>
-                        <p className='col-12 col-lg-3'><a href='/sessions'>Sessions</a></p>
-                        <p className='col-12 col-lg-2'><a href='/userinfo'>User Info</a></p>
-                        <p className='col-12 col-lg-3 navigation-panel--logout' onClick={handleLogout}>Logout</p>
-                        {/* <p className='col-12 col-lg-3'><a href='/about_me'>{t('header.about_me')}</a></p> */}
-                    </div>
+                <div className="navigation-panel__container container">
+                    <a className="navigation-panel__container--item" href='/photos'>Photos</a>
+                    <a className="navigation-panel__container--item" href='/categories'>Categories</a>
+                    <a className="navigation-panel__container--item" href='/sessions'>Sessions</a>
+                    <a className="navigation-panel__container--item" href='/userinfo'>User Info</a>
+                    <p className='navigation-panel__container--item' onClick={handleLogout}>Logout</p>
                 </div>
             </div>
         </header>
