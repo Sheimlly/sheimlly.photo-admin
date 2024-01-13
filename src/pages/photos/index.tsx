@@ -145,7 +145,7 @@ const PhotosPage = () => {
                             <input className='filters-section__container__filters__checkbox-container--input' type="checkbox" onChange={(e) => handleCheckbox(e)} />
                         </div>
                         
-                        <a href='/photos/add' className='filters-section__container__filters--button'>Add Photo</a>
+                        <a href='/photos/add' className='filters-section__container__filters--button link-button'>Add Photo</a>
                     </div>
                 </div>
             </section>
@@ -161,7 +161,7 @@ const PhotosPage = () => {
                                     {photo.session_name ? <p className='photos-section__container__photo-info--category'>{photo.session_name}</p> : ''}
                                     <p className='photos-section__container__photo-info--category'>{photo.date_created}</p>
                                     <p className='photos-section__container--photo__photo-info--main-page'>Main Page: <span>{photo.main_page ? 'True' : 'False'}</span></p>
-                                    <a href={`/photos/${photo.id}`} className='photos-section__container--photo__photo-info--button'>Edit</a>
+                                    <a href={`/photos/${photo.id}`} className='photos-section__container--photo__photo-info--button link-button'>Edit</a>
                                     <span className='photos-section__container--photo__photo-info--delete delete-button' onClick={() => handleDelete(photo.id)}>Delete</span>
                                 </div>
                             </div>

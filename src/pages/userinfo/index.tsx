@@ -182,7 +182,7 @@ const UserInfoPage = () => {
                                     <strong>Username</strong>
                                     <a href={social.link}>{social.username}</a>
                                 </div>
-                                <button className='socials-section__container__social--button' onClick={() => handleSocialMediaDelete(social.id)}>Delete</button>
+                                <p className='socials-section__container__social--button delete-button' onClick={() => handleSocialMediaDelete(social.id)}>Delete</p>
                             </div>
                         )
                     })}

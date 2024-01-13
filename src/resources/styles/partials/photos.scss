@@ -29,23 +29,6 @@
 
                 &--button {
                     margin-top: 20px;
-                    border-radius: 5px;
-                    border: 1px solid #9d64b3;
-                    box-shadow: none;
-                    background: #9d64b3;
-                    outline: none;
-                    color: #FFFFFF;
-                    padding: 5px 20px;
-
-                    text-decoration: none;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-
-                    &:hover {
-                        cursor: pointer;
-                        opacity: 50%;
-                    }
                 }
 
                 &--delete {

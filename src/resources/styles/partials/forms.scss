@@ -271,12 +271,3 @@
 .edit-photo__container {
     flex-direction: row;
 }
-
-.delete-button {
-    text-decoration: underline;
-
-    &:hover {
-        opacity: 0.5;
-        cursor: pointer;
-    }
-}

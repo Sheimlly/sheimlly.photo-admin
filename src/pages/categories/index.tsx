@@ -68,7 +68,7 @@ const CategoriesPage = () => {
 
                     <div className='filters-section__container__filters'>
                         <input className='filters-section__container__filters--input' onChange={(e) => { setSearch(e.target.value) }} type="text" value={search} placeholder='Name'/>
-                        <a href='/categories/add' className='filters-section__container__filters--button'>Add Category</a>
+                        <a href='/categories/add' className='filters-section__container__filters--button link-button'>Add Category</a>
                     </div>
                 </div>
             </section>
@@ -83,7 +83,7 @@ const CategoriesPage = () => {
                                     <span> - </span>
                                     <p>{category.name_pl}</p>
                                 </div>
-                                <a className='categories-section__container__category--button' href={`/categories/${category.id}`}>Edit</a>
+                                <a className='categories-section__container__category--button link-button' href={`/categories/${category.id}`}>Edit</a>
                                 { category.able_to_delete &&
                                     <p className='categories-section__container__category--delete delete-button' onClick={() => {handleDelete(category.id)}}>Delete</p>
                                 }

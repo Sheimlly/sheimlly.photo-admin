@@ -69,7 +69,7 @@ const SessionsPage = () => {
 
                     <div className='filters-section__container__filters'>
                         <input className='filters-section__container__filters--input' onChange={(e) => { setSearch(e.target.value) }} type="text" value={search} placeholder='Name'/>
-                        <a href='/sessions/add' className='filters-section__container__filters--button'>Add Session</a>
+                        <a href='/sessions/add' className='filters-section__container__filters--button link-button'>Add Session</a>
                     </div>
                 </div>
             </section>
@@ -93,7 +93,7 @@ const SessionsPage = () => {
                                     <p className="session-section__container__session__text-container--value">{session.date_taken}</p>
                                 </div>
                                 <div className="session-section__container__session__buttons-container">
-                                    <a className="session-section__container__session__buttons-container--edit" href={`/sessions/${session.id}`}>Edit</a>
+                                    <a className="session-section__container__session__buttons-container--edit link-button" href={`/sessions/${session.id}`}>Edit</a>
                                     <p className="session-section__container__session__buttons-container--delete delete-button" onClick={() => handleDelete(session.id)}>Delete with all photos</p>
                                 </div>
                             </div>
