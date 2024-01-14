@@ -145,7 +145,7 @@ const UserInfoPage = () => {
                         <input className='form-section__container__form--input' type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{name: e.target.value} as unknown as AddSocialMedia})} placeholder="Name" name="name" value={socialMedia?.name} required/>
                         <div className='form-section__container__form__file-container'>
                             <label className='form-section__container__form__file-container--label form-section__container__form--label'>Image</label>
-                            <input className='form-section__container__form__file-container--input form-section__container__form--input' type="file" onChange={(e) => {handleFileChange(e)}} required />
+                            <input className='form-section__container__form__file-container--input form-section__container__form--input' type="file" accept="image/png, image/jpeg, image/svg" onChange={(e) => {handleFileChange(e)}} required />
                         </div>
                         <input className='form-section__container__form--input' type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{username: e.target.value} as unknown as AddSocialMedia})} placeholder="Username" name="username" value={socialMedia?.username} required/>
                         <input className='form-section__container__form--input' type="text" onChange={(e) => setSocialMedia({...socialMedia, ...{link: e.target.value} as unknown as AddSocialMedia})} placeholder="Link" name="link" value={socialMedia?.link} required/>

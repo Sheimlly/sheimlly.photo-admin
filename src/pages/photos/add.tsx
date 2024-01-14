@@ -87,7 +87,7 @@ const AddPhoto = () => {
                 <form className='form-section__container__form' onSubmit={(e) => addPhoto(e)}>
                     <div className='form-section__container__form__file-container'>
                         <label className='form-section__container__form__file-container--label form-section__container__form--label'>Image</label>
-                        <input className='form-section__container__form__file-container--input form-section__container__form--input' type="file" onChange={(e) => {handleFileChange(e)}} required />
+                        <input className='form-section__container__form__file-container--input form-section__container__form--input' type="file" accept="image/png, image/jpeg" onChange={(e) => {handleFileChange(e)}} required />
                     </div>
                     <div className='form-section__container__form__select-container'>
                         <label className='form-section__container__form__select-container--label form-section__container__form--label'>Category</label>
