@@ -4,11 +4,12 @@ import api from "../../helpers/api";
 import { Categories } from "../../helpers/interfaces";
 
 const EditCategory = () => {
-    const { id } = useParams();
     const token = localStorage.getItem("token");
     if (!token) {
         window.location.href = '/login';
     }
+    
+    const { id } = useParams();
 
     const [category, setCategory] = useState<Categories>();
 

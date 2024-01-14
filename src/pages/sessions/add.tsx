@@ -55,6 +55,11 @@ const PhotosList = ({photos, categories, deletePhoto}:Props ) => {
 }
 
 const AddSession = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        window.location.href = '/login';
+    }
+    
     const sessionName = useRef<HTMLInputElement>(null);
     const sessionNamePl = useRef<HTMLInputElement>(null);
     const sessionDateTaken = useRef<HTMLInputElement>(null);

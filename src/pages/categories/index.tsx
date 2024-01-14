@@ -3,6 +3,11 @@ import { useState, useEffect } from "react";
 import api from "../../helpers/api";
 
 const CategoriesPage = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        window.location.href = '/login';
+    }
+    
     const [categories, setCategories] = useState<Categories[] | []>([]);
     const [search, setSearch] = useState<string>();
 

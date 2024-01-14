@@ -3,6 +3,11 @@ import { Categories, Sessions, PhotoAdd } from '../../helpers/interfaces';
 import api from "../../helpers/api";
 
 const AddPhoto = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        window.location.href = '/login';
+    }
+    
     const [categories, setCategories] = useState<Categories[] | []>([]);
     const [sessions, setSessions] = useState<Sessions[] | []>([]);
 

@@ -3,10 +3,10 @@ import { CategoryAdd } from '../../helpers/interfaces';
 import api from "../../helpers/api";
 
 const AddCategory = () => {
-    // const [category, setCategory] = useState<CategoryAdd>({
-    //     name: undefined,
-    //     name_pl: undefined
-    // });
+    const token = localStorage.getItem("token");
+    if (!token) {
+        window.location.href = '/login';
+    }
 
     const categoryName = useRef<HTMLInputElement>(null)
     const categoryNamePl = useRef<HTMLInputElement>(null)

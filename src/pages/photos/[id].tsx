@@ -12,11 +12,12 @@ interface Photo {
 }
 
 const EditPhoto = () => {
-    const { id } = useParams();
     const token = localStorage.getItem("token");
     if (!token) {
         window.location.href = '/login';
     }
+    
+    const { id } = useParams();
 
     const [image, setImage] = useState();
     const [photo, setPhoto] = useState<Photo>();

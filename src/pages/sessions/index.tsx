@@ -3,6 +3,11 @@ import { useState, useEffect } from "react";
 import api from "../../helpers/api";
 
 const SessionsPage = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        window.location.href = '/login';
+    }
+    
     const [sessions, setSessions] = useState<Sessions[] | []>([]);
     const [search, setSearch] = useState<string>();
 

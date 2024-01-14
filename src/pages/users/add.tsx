@@ -2,14 +2,20 @@ import { FormEvent, useRef, useEffect, useState} from 'react';
 import { UserAdd } from '../../helpers/interfaces';
 import api from "../../helpers/api";
 
-const AddSession = () => {
+const AddUser = () => {
+
+    const is_admin = (localStorage.getItem("is_admin") == 'true');
+    if (!is_admin) {
+        window.location.href = '/';
+    }
+
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showPassword2, setShowPassword2] = useState<boolean>(false);
 
     const email = useRef<HTMLInputElement>(null);
     const password = useRef<HTMLInputElement>(null);
     const password2 = useRef<HTMLInputElement>(null);
-    const is_admin = useRef<HTMLInputElement>(null);
+    const admin = useRef<HTMLInputElement>(null);
 
     const [emailError, setEmailError] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
@@ -29,7 +35,7 @@ const AddSession = () => {
             email: email.current?.value,
             password: password.current?.value,
             password2: password.current?.value,
-            is_admin: is_admin.current?.checked
+            is_admin: admin.current?.checked
         }
 
         api.post('/api/users/', data)
@@ -172,7 +178,7 @@ const AddSession = () => {
 
                     <div className='form-section__container__form__checkbox-container'>
                         <label className='form-section__container__form__checkbox-container--label'>Is admin</label>
-                        <input className='form-section__container__form__checkbox-container--input' type='checkbox' ref={is_admin} />
+                        <input className='form-section__container__form__checkbox-container--input' type='checkbox' ref={admin} />
                     </div>
                     <div className='form-section__container__form__submit-container'>
                         <input className='form-section__container__form__submit-container--button' type='submit' value='Add session' />
@@ -188,4 +194,4 @@ const AddSession = () => {
     )
 }
 
-export default AddSession;
+export default AddUser;
