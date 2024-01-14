@@ -19,6 +19,7 @@ export type Path =
   | `/sessions/add`
   | `/userinfo`
   | `/users`
+  | `/users/:id`
   | `/users/add`
 
 export type Params = {
@@ -26,6 +27,7 @@ export type Params = {
   '/password_reset/:reset_token': { reset_token: string }
   '/photos/:id': { id: string }
   '/sessions/:id': { id: string }
+  '/users/:id': { id: string }
 }
 
 export type ModalPath = never

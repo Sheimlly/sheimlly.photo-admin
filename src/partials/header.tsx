@@ -1,8 +1,12 @@
 const Header = () => {
     const handleLogout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("refresh");
+        localStorage.removeItem("is_admin");
         window.location.href = '/login';
     }
+
+    const is_admin = (localStorage.getItem("is_admin") == 'true');
 
     return (
         <header className="">
@@ -17,6 +21,7 @@ const Header = () => {
                     <a className="navigation-panel__container--item" href='/categories'>Categories</a>
                     <a className="navigation-panel__container--item" href='/sessions'>Sessions</a>
                     <a className="navigation-panel__container--item" href='/userinfo'>User Info</a>
+                    {is_admin ? <a className="navigation-panel__container--item" href='/users'>Users</a> : ''}
                     <p className='navigation-panel__container--item' onClick={handleLogout}>Logout</p>
                 </div>
             </div>

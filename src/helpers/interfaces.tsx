@@ -74,3 +74,16 @@ export interface AddSocialMedia {
     username: string | undefined;
     link: string | undefined;
 }
+
+export interface Users {
+    id: number;
+    email: string;
+    is_admin: boolean;
+    is_active: boolean;
+}
+
+export interface UserFilters {
+    search: string | undefined,
+    is_admin: boolean | undefined,
+    is_active: boolean | undefined
+}

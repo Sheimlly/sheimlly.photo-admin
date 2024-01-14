@@ -29,6 +29,7 @@ const LoginForm = () => {
             .then(response => {
                 localStorage.setItem('token', response.data.access);
                 localStorage.setItem('refresh', response.data.refresh);
+                localStorage.setItem('is_admin', response.data.is_admin);
                 window.location.href = '/';
             })
             .catch(err => console.log(err));
