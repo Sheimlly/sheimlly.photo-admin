@@ -70,7 +70,7 @@ const UserInfoPage = () => {
                 <div className='filters-section__container'>
                     <h3 className='filters-section--title'>Filters</h3>
 
-                    <div className='filters-section__container__filters photo-filters'>
+                    <div className='filters-section__container__filters user-filters'>
                         <input className='filters-section__container__filters--input' onChange={(e) => { handleFilterChange('search', e.target.value) }} type="text" value={filters?.search} placeholder='Name'/>
                         
                         <div className='filters-section__container__filters__checkbox-container'>
