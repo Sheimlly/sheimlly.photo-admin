@@ -82,6 +82,13 @@ export interface Users {
     is_active: boolean;
 }
 
+export interface UserAdd {
+    email: string | undefined;
+    password: string | undefined;
+    password2: string | undefined;
+    is_admin: boolean | undefined;
+}
+
 export interface UserFilters {
     search: string | undefined,
     is_admin: boolean | undefined,

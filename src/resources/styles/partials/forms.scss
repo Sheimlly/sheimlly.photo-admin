@@ -58,6 +58,10 @@
                     outline-color: #9d64b3 !important;
                 }
             }
+
+            &--error {
+                color: red;
+            }
     
             &__password-container{
                 display: flex;
