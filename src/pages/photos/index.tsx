@@ -41,11 +41,11 @@ const PhotosPage = () => {
             handleFilterChange('main_page', true)
         }
         else {
-            handleFilterChange('main_page', false)
+            handleFilterChange('main_page', undefined)
         }
     }
 
-    const handleFilterChange = (name: string, value: string | number | boolean) => {
+    const handleFilterChange = (name: string, value: string | boolean | undefined) => {
         if (name == 'session' && value == 'None' || name == 'category' && value == 'None') {
             setFilters({
                 ...filters,

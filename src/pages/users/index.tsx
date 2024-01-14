@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, FormEvent, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import api from "../../helpers/api";
 import { UserFilters, Users } from '../../helpers/interfaces';
 
