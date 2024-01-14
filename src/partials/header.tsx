@@ -3,6 +3,7 @@ const Header = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("refresh");
         localStorage.removeItem("is_admin");
+        localStorage.removeItem("is_superuser");
         window.location.href = '/login';
     }
 

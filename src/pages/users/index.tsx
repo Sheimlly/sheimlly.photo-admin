@@ -8,6 +8,7 @@ const UserInfoPage = () => {
         window.location.href = '/login';
     }
 
+    const is_superuser = (localStorage.getItem("is_superuser") == 'true');
     const is_admin = (localStorage.getItem("is_admin") == 'true');
     if (!is_admin) {
         window.location.href = '/';
@@ -98,7 +99,7 @@ const UserInfoPage = () => {
                                 <p className="users-section__container__user--text">Is active: <strong>{user.is_active ? 'true' : 'false'}</strong></p>
 
                                 <a className="users-section__container__user--button link-button" href={`/users/${user.id}`}>Edit</a>
-                                <p className="users-section__container__user--delete delete-button" onClick={() => handleDelete(user.id)}>Delete</p>
+                                {!user.is_admin || is_superuser ? <p className="users-section__container__user--delete delete-button" onClick={() => handleDelete(user.id)}>Delete</p> : '' }
                             </div>
                         )
                     })}

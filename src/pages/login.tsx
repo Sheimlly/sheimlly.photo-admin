@@ -30,6 +30,7 @@ const LoginForm = () => {
                 localStorage.setItem('token', response.data.access);
                 localStorage.setItem('refresh', response.data.refresh);
                 localStorage.setItem('is_admin', response.data.is_admin);
+                localStorage.setItem('is_superuser', response.data.is_superuser);
                 window.location.href = '/';
             })
             .catch(err => console.log(err));
