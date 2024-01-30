@@ -120,6 +120,10 @@
                         }
                     }
                 }
+
+                &--error {
+                    color: red;
+                }
             }
             
             &__select-container {}
@@ -164,7 +168,16 @@
                     font-weight: 600;
                 }
     
-                &--button:hover {
+                &--button:disabled {
+                    opacity: 0.75;
+                }
+
+                &--button:disabled + &--arrow-right {
+                    display: none;
+                }
+
+
+                &--button:hover:enabled {
                     border-top-right-radius: 0;
                     border-bottom-right-radius: 0;
                 }
@@ -274,4 +287,8 @@
 
 .edit-photo__container {
     flex-direction: row;
+}
+
+.multiple-files {
+    height: 150px;
 }
