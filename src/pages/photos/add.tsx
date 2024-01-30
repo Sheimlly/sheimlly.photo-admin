@@ -19,6 +19,8 @@ const AddPhoto = () => {
         main_page: false,
     });
 
+    const [filenameError, setFilenameError] = useState<boolean>(false);
+
     const handleCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
         if (!e.target) return;
         if (e.target.checked) {
@@ -37,10 +39,18 @@ const AddPhoto = () => {
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files) return; 
-        setPhoto({
-            ...photo,
-            ...{image: e.target.files[0]} as unknown as PhotoAdd
-        });
+        setFilenameError(false);
+
+        if (e.target.files[0].name.length > 50) {
+            setFilenameError(true);
+            e.target.value = '';
+        }
+        else {
+            setPhoto({
+                ...photo,
+                ...{image: e.target.files[0]} as unknown as PhotoAdd
+            });
+        }
     }
 
     const addPhoto = (e: FormEvent) => {
@@ -93,6 +103,7 @@ const AddPhoto = () => {
                     <div className='form-section__container__form__file-container'>
                         <label className='form-section__container__form__file-container--label form-section__container__form--label'>Image</label>
                         <input className='form-section__container__form__file-container--input form-section__container__form--input' type="file" accept="image/png, image/jpeg" onChange={(e) => {handleFileChange(e)}} required />
+                        {filenameError ? <p className='form-section__container__form__file-container--error'>Filename is too long (filename can't be longer than 50 characters)</p> : '' }
                     </div>
                     <div className='form-section__container__form__select-container'>
                         <label className='form-section__container__form__select-container--label form-section__container__form--label'>Category</label>
