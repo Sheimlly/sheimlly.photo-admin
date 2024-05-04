@@ -1,6 +1,7 @@
 import { Sessions } from "../../helpers/interfaces";
 import { useState, useEffect } from "react";
 import api from "../../helpers/api";
+import { LinkButton } from "../../partials/buttons";
 
 const SessionsPage = () => {
     const token = localStorage.getItem("token");
@@ -74,7 +75,7 @@ const SessionsPage = () => {
 
                     <div className='filters-section__container__filters'>
                         <input className='filters-section__container__filters--input' onChange={(e) => { setSearch(e.target.value) }} type="text" value={search} placeholder='Name'/>
-                        <a href='/sessions/add' className='filters-section__container__filters--button link-button'>Add Session</a>
+                        <LinkButton text="Add Session" link="/sessions/add" custom_class="filters-section__container__filters--button" />
                     </div>
                 </div>
             </section>

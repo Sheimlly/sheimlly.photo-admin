@@ -1,6 +1,7 @@
-import { useState, useEffect, ChangeEvent, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import api from "../helpers/api";
 import { Photos, Categories, Sessions, PhotoFilters } from '../helpers/interfaces';
+import { LinkButton } from "../partials/buttons";
 
 const HomePage = () => {
     const token = localStorage.getItem("token");
@@ -131,7 +132,7 @@ const HomePage = () => {
                             </select>
                         </div>
                         
-                        <a href='/photos/add' className='filters-section__container__filters--button link-button'>Add Photo</a>
+                        <LinkButton text="Add Photo" link="/photos/add" custom_class="filters-section__container__filters--button" />
                     </div>
                 </div>
             </section>

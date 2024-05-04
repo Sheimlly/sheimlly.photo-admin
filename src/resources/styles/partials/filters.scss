@@ -9,7 +9,7 @@
         &__filters {
             display: flex;
             align-items: center;
-            // justify-content: space-between;
+            justify-content: space-between;
 
             &--input,
             &--select {
@@ -62,9 +62,9 @@
                 }
             }
 
-            &--button {
-                margin-left: auto;
-            }
+            // &--button {
+            //     margin-left: auto;
+            // }
         }
     }
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect, ChangeEvent, useRef } from "react";
 import api from "../../helpers/api";
 import { Photos, Categories, Sessions, PhotoFilters } from '../../helpers/interfaces';
+import { LinkButton } from "../../partials/buttons";
 
 const PhotosPage = () => {
     const token = localStorage.getItem("token");
@@ -145,7 +146,7 @@ const PhotosPage = () => {
                             <input className='filters-section__container__filters__checkbox-container--input' type="checkbox" onChange={(e) => handleCheckbox(e)} />
                         </div>
                         
-                        <a href='/photos/add' className='filters-section__container__filters--button link-button'>Add Photo</a>
+                        <LinkButton text="Add Photo" link="/photos/add" custom_class="filters-section__container__filters--button" />
                     </div>
                 </div>
             </section>

@@ -1,6 +1,7 @@
 import { Categories } from "../../helpers/interfaces";
 import { useState, useEffect } from "react";
 import api from "../../helpers/api";
+import { LinkButton } from "../../partials/buttons";
 
 const CategoriesPage = () => {
     const token = localStorage.getItem("token");
@@ -73,7 +74,7 @@ const CategoriesPage = () => {
 
                     <div className='filters-section__container__filters'>
                         <input className='filters-section__container__filters--input' onChange={(e) => { setSearch(e.target.value) }} type="text" value={search} placeholder='Name'/>
-                        <a href='/categories/add' className='filters-section__container__filters--button link-button'>Add Category</a>
+                        <LinkButton text="Add Category" link="/categories/add" custom_class="filters-section__container__filters--button" />
                     </div>
                 </div>
             </section>

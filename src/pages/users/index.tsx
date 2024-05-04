@@ -1,6 +1,7 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import api from "../../helpers/api";
 import { UserFilters, Users } from '../../helpers/interfaces';
+import { LinkButton } from "../../partials/buttons";
 
 const UserInfoPage = () => {
     const token = localStorage.getItem("token");
@@ -83,8 +84,8 @@ const UserInfoPage = () => {
                             <p className='filters-section__container__filters__select-container--text'>Active</p>
                             <input className='filters-section__container__filters__checkbox-container--input' type="checkbox" onChange={(e) => handleCheckbox('is_active', e)} />
                         </div>
-                        
-                        <a href='/users/add' className='filters-section__container__filters--button link-button'>Add User</a>
+
+                        <LinkButton text="Add User" link="/users/add" custom_class="filters-section__container__filters--button" />
                     </div>
                 </div>
             </section>
